@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SparseMatrix.h"
+#include "boost\smart_ptr\scoped_array.hpp"
 
 using namespace std;
 
@@ -95,7 +96,26 @@ SparseMatrix SparseMatrix::FastTranspose()
 {
   SparseMatrix b(cols, rows);
 
-  int *rowSize = new int[cols];
-  int *rowStart = new int[cols];
+  boost::scoped_array<int> rowSize(new int[cols]);
+  boost::scoped_array<int> rowStart(new int[cols]);
+
+  b.rows = cols;
+  b.cols = rows;
+
+  if (terms <= 0) return b;
+
+  for (int i = 0; i < cols; ++i) rowSize[i] = 0; // initialize
+  for (int i = 0; i < terms; ++i) ++rowSize[smArray[i].col];
+
+  rowStart[0] = 0;
+  for (int i = 1; i < cols; ++i) rowStart[i] = rowStart[i - 1] + rowSize[i - 1];
+
+  for (int i = 0; i < terms; ++i)
+  {
+    int j = rowStart[smArray[i].col];
+    b.NewTerm(smArray[i].col, smArray[i].row, smArray[i].value); // b.terms added here
+    ++rowStart[smArray[i].col];
+  }
+
   return b;
 }
