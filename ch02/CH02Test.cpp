@@ -70,4 +70,24 @@ void CH02Test::testSparseMatrix(void)
   TEST_ASSERT(sm2 == sm1.Transpose());
   TEST_ASSERT(sm2 == sm1.FastTranspose());
 
+  SparseMatrix sm3(3, 3);
+  sm3.NewTerm(0, 0, 1);
+  sm3.NewTerm(1, 0, 1);
+  sm3.NewTerm(2, 0, 1);
+  SparseMatrix sm4(3, 3);
+  sm4.NewTerm(0, 0, 1);
+  sm4.NewTerm(0, 1, 1);
+  sm4.NewTerm(0, 2, 1);
+  SparseMatrix sm5(3, 3);
+  sm5.NewTerm(0, 0, 1);
+  sm5.NewTerm(0, 1, 1);
+  sm5.NewTerm(0, 2, 1);
+  sm5.NewTerm(1, 0, 1);
+  sm5.NewTerm(1, 1, 1);
+  sm5.NewTerm(1, 2, 1);
+  sm5.NewTerm(2, 0, 1);
+  sm5.NewTerm(2, 1, 1);
+  sm5.NewTerm(2, 2, 1);
+  sm3 *= sm4;
+  TEST_ASSERT(sm3 == sm5);
 }

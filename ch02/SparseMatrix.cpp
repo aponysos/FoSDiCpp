@@ -49,6 +49,13 @@ bool SparseMatrix::operator==(const SparseMatrix & sm)
   return true;
 }
 
+void SparseMatrix::NewTerm(int r, int c, int v, int pos)
+{
+  smArray[pos].row = r;
+  smArray[pos].col = c;
+  smArray[pos].value = v;
+}
+
 void SparseMatrix::NewTerm(int r, int c, int v)
 {
   if (terms >= MAX_TERMS) {
@@ -56,10 +63,7 @@ void SparseMatrix::NewTerm(int r, int c, int v)
     return;
   }
 
-  smArray[terms].row = r;
-  smArray[terms].col = c;
-  smArray[terms].value = v;
-  ++terms;
+  NewTerm(r, c, v, terms++);
 }
 void SparseMatrix::NewTerm(const MatrixTerm & mt)
 {
@@ -92,7 +96,7 @@ SparseMatrix SparseMatrix::Transpose()
   return b;
 }
 
-SparseMatrix SparseMatrix::FastTranspose()
+SparseMatrix SparseMatrix::FastTranspose() const
 {
   SparseMatrix b(cols, rows);
 
@@ -118,4 +122,80 @@ SparseMatrix SparseMatrix::FastTranspose()
   }
 
   return b;
+}
+
+int SparseMatrix::StoreSum(int sum, int & lastInResult, int r, int c)
+{
+  if (sum == 0) return 0;
+  
+  if (lastInResult < MAX_TERMS - 1)
+  {
+    NewTerm(r, c, sum, ++lastInResult);
+    return 0;
+  }
+  else
+    return 1;
+}
+
+SparseMatrix & SparseMatrix::operator*=(const SparseMatrix & b)
+{
+  if (cols != b.rows)
+    throw exception();
+  if ((terms == MAX_TERMS) || (b.terms == MAX_TERMS))
+    throw exception();
+
+  SparseMatrix result;
+  SparseMatrix bXpose = b.FastTranspose();
+  int curRowIndex = 0;
+  int curRowA = smArray[curRowIndex].row;
+  int curRowBegin = curRowIndex;
+  int sum = 0;
+  int lastInResult = -1;
+
+  // set boundary conditions
+  smArray[terms].row = rows;
+  bXpose.smArray[b.terms].row = b.rows;
+  bXpose.smArray[b.terms].col = -1;
+
+  while (curRowIndex < terms) // generate row curRowA of result
+  {
+    int curColIndex = 0;
+    int curColB = bXpose.smArray[curColIndex].row;
+
+    while (curColIndex <= b.terms) // multiply row curRowA of A by column curColB of b
+    {
+      if (smArray[curRowIndex].row != curRowA // end of row curRowA of A
+        || bXpose.smArray[curColIndex].row != curColB) // end of column curColB of b
+      {
+        if (result.StoreSum(sum, lastInResult, curRowA, curColB))
+          throw exception();
+
+        sum = 0; // reset sum
+        curRowIndex = curRowBegin;
+        while (bXpose.smArray[curColIndex].row == curColB) // go to next column
+          ++curColIndex;
+        curColB = bXpose.smArray[curColIndex].row;
+      }
+      else
+      {
+        int colA = smArray[curRowIndex].col;
+        int colB = bXpose.smArray[curColIndex].col;
+        if (colA < colB)
+          ++curRowIndex;
+        else if (colA > colB)
+          ++curColIndex;
+        else // colA == colB
+          sum += smArray[curRowIndex++].value * bXpose.smArray[curColIndex++].value;
+      }
+    }
+
+    while (smArray[curRowIndex].row == curRowA) // advanced to next row
+      ++curRowIndex;
+    curRowBegin = curRowIndex;
+    curRowA = smArray[curRowIndex].row;
+  }
+
+  result.rows = rows; result.cols = b.cols; result.terms = lastInResult + 1;
+
+  return *this = result;
 }
