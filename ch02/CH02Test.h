@@ -9,5 +9,6 @@ protected:
   void testHelloWorld(void);
   void testPolynomial(void);
   void testSparseMatrix(void);
+  void testString(void);
 
 };

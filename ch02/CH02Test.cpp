@@ -2,6 +2,7 @@
 #include "CH02Test.h"
 #include "Polynomial.h"
 #include "SparseMatrix.h"
+#include "String.h"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ CH02Test::CH02Test(void)
   TEST_ADD(CH02Test::testHelloWorld);
   TEST_ADD(CH02Test::testPolynomial);
   TEST_ADD(CH02Test::testSparseMatrix);
+  TEST_ADD(CH02Test::testString);
 }
 
 
@@ -90,4 +92,18 @@ void CH02Test::testSparseMatrix(void)
   sm5.NewTerm(2, 2, 1);
   sm3 *= sm4;
   TEST_ASSERT(sm3 == sm5);
+}
+
+void CH02Test::testString(void)
+{
+  String s1("abcaabcabcacabcacab");
+  String s2("abcaabcabcacacacab");
+  String pat("abcabcacab");
+
+  TEST_ASSERT(s1.Length() == 19);
+  TEST_ASSERT(s1.Find(pat) == 4);
+  TEST_ASSERT(s1.FastFind(pat) == 4);
+  TEST_ASSERT(s2.Find(pat) == -1);
+  TEST_ASSERT(s2.FastFind(pat) == -1);
+
 }
