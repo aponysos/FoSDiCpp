@@ -23,4 +23,12 @@ void CH03Test::testDeque(void)
   TEST_ASSERT(deq2.GetAt(0) == 1);
   TEST_ASSERT(deq2.GetAt(1) == 2);
   TEST_ASSERT(deq2.GetAt(2) == 3);
+  deq1.PushBack(0);
+  deq1.PushFront(1);
+  TEST_ASSERT(deq1.PeekBack() == 0);
+  TEST_ASSERT(deq1.PeekFront() == 1);
+  TEST_ASSERT(deq1.Size() == 2);
+  TEST_ASSERT(deq1.PopBack() == 0);
+  TEST_ASSERT(deq1.PopFront() == 1);
+  TEST_ASSERT(deq1.IsEmpty());
 }

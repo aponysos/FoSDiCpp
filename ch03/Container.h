@@ -6,10 +6,10 @@ template<class KeyType>
 class Deque
 {
 public:
-  Deque(int capacity = DEFAULT_CAPACITY)
+  Deque(int maxSize = 0)
     : array_(NULL), capacity_(0), size_(0), front_(0), back_(0)
   {
-    capacity_ = capacity <= 0 ? DEFAULT_CAPACITY : capacity;
+    capacity_ = CalculateCapacity(maxSize);
     array_ = new KeyType[capacity_];
   }
 
@@ -21,7 +21,7 @@ public:
     if (array == NULL || size <= 0)
       throw exception();
 
-    ExtendCapacity(size);
+    Extend(size);
     size_ = size;
 
     for (int i = 0; i < size_; ++i)
@@ -50,7 +50,7 @@ public:
   {
     if (IsFull())
     {
-      ExtendCapacity(size_ + 1);
+      Extend(size_ + 1);
       PushFront(x);
     }
     else
@@ -81,7 +81,7 @@ public:
   {
     if (IsFull())
     {
-      ExtendCapacity(size_ + 1);
+      Extend(size_ + 1);
       PushBack(x);
     }
     else
@@ -114,13 +114,18 @@ private:
   int Prev(int pos) { return pos == 0 ? capacity_ - 1 : Pos(pos - 1);; } // previous position
   int I2P(int idx) { return Pos(front_ + idx); } // index to position
 
-  void ExtendCapacity(int newSize)
+  int CalculateCapacity(int size)
+  {
+    int capacity = DEFAULT_CAPACITY;
+    while (capacity < size) capacity *= 2;
+    return capacity;
+  }
+
+  void Extend(int newSize)
   {
     if (CheckCapacity(newSize - 1)) return;
 
-    int newCapacity = capacity_ == 0 ? DEFAULT_CAPACITY : capacity_;
-    while (newCapacity < newSize) newCapacity *= 2;
-    capacity_ = newCapacity;
+    capacity_ = CalculateCapacity(newSize);
 
     // copy to newArray
     int *newArray = new KeyType[capacity_];
