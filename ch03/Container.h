@@ -46,12 +46,67 @@ public:
   }
 
 public:
-  void PushFront(const KeyType &x);
-  KeyType PeekFront();
-  KeyType PopFront();
-  void PushBack(const KeyType &x);
-  KeyType PeekBack();
-  KeyType PopBack();
+  void PushFront(const KeyType &x)
+  {
+    if (IsFull())
+    {
+      ExtendCapacity(size_ + 1);
+      PushFront(x);
+    }
+    else
+    {
+      ++size_;
+      front_ = Prev(front_);
+      array_[front_] = x;
+    }
+  }
+
+  KeyType PeekFront()
+  {
+    if (IsEmpty())
+      throw exception();
+
+    return array_[front_];
+  }
+
+  KeyType PopFront()
+  {
+    KeyType ret = PeekFront();
+    front_ = Next(front_);
+    --size_;
+    return ret;
+  }
+
+  void PushBack(const KeyType &x)
+  {
+    if (IsFull())
+    {
+      ExtendCapacity(size_ + 1);
+      PushBack(x);
+    }
+    else
+    {
+      ++size_;
+      array_[back_] = x;
+      back_ = Next(back_);
+    }
+  }
+
+  KeyType PeekBack()
+  {
+    if (IsEmpty())
+      throw exception();
+
+    return array_[Prev(back_)];
+  }
+
+  KeyType PopBack()
+  {
+    KeyType ret = PeekBack();
+    back_ = Prev(back_);
+    --size_;
+    return ret;
+  }
 
 private:
   int Pos(int pos) { return pos % capacity_; } // circular position
