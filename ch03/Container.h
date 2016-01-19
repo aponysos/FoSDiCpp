@@ -116,3 +116,39 @@ private:
   int front_;
   int back_;
 };
+
+template<class KeyType>
+class Stack : protected Deque<KeyType>
+{
+public:
+  Stack(int size = 0, const KeyType * array = NULL)
+    : Deque<KeyType>(0, array) {}
+
+public:
+  int Size() { return Deque<KeyType>::Size(); }
+  bool IsEmpty() { return Deque<KeyType>::IsEmpty(); }
+
+public:
+  void Push(const KeyType &x) { Deque<KeyType>::PushBack(x); }
+  KeyType Peek()  { return Deque<KeyType>::PeekBack(); }
+  KeyType Pop()  { return Deque<KeyType>::PopBack(); }
+
+};
+
+template<class KeyType>
+class Queue: protected Deque<KeyType>
+{
+public:
+  Queue(int size = 0, const KeyType * array = NULL)
+    : Deque<KeyType>(0, array) {}
+
+public:
+  int Size() { return Deque<KeyType>::Size(); }
+  bool IsEmpty() { return Deque<KeyType>::IsEmpty(); }
+
+public:
+  void Add(const KeyType &x) { Deque<KeyType>::PushBack(x); }
+  KeyType Peek()  { return Deque<KeyType>::PeekFront(); }
+  KeyType Delete()  { return Deque<KeyType>::PopFront(); }
+
+};
