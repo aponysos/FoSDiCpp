@@ -122,7 +122,7 @@ class Stack : protected Deque<KeyType>
 {
 public:
   Stack(int size = 0, const KeyType * array = NULL)
-    : Deque<KeyType>(0, array) {}
+    : Deque<KeyType>(size, array) {}
 
 public:
   int Size() { return Deque<KeyType>::Size(); }
@@ -140,7 +140,7 @@ class Queue: protected Deque<KeyType>
 {
 public:
   Queue(int size = 0, const KeyType * array = NULL)
-    : Deque<KeyType>(0, array) {}
+    : Deque<KeyType>(size, array) {}
 
 public:
   int Size() { return Deque<KeyType>::Size(); }

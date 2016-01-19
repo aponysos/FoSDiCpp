@@ -8,5 +8,7 @@ public:
 protected:
   void testHelloWorld(void);
   void testDeque(void);
+  void testStack(void);
+  void testQueue(void);
 
 };

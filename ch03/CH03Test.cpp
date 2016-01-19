@@ -8,6 +8,8 @@ CH03Test::CH03Test(void)
 {
   TEST_ADD(CH03Test::testHelloWorld);
   TEST_ADD(CH03Test::testDeque);
+  TEST_ADD(CH03Test::testStack);
+  TEST_ADD(CH03Test::testQueue);
 }
 
 void CH03Test::testHelloWorld(void)
@@ -58,4 +60,28 @@ void CH03Test::testDeque(void)
   TEST_ASSERT(deq4.GetAt(0) == 0);
   TEST_ASSERT(deq4.GetAt(3) == 0);
 
+}
+
+void CH03Test::testStack(void)
+{
+  Stack<int> stk;
+  stk.Push(0);
+  TEST_ASSERT(stk.Size() == 1);
+  stk.Push(1);
+  stk.Push(2);
+  TEST_ASSERT(stk.Pop() == 2);
+  TEST_ASSERT(stk.Size() == 2);
+  TEST_ASSERT(stk.Pop() == 1);
+}
+
+void CH03Test::testQueue(void)
+{
+  Queue<int> que;
+  que.Add(0);
+  TEST_ASSERT(que.Size() == 1);
+  que.Add(1);
+  que.Add(2);
+  TEST_ASSERT(que.Delete() == 0);
+  TEST_ASSERT(que.Size() == 2);
+  TEST_ASSERT(que.Delete() == 1);
 }
