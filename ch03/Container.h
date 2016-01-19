@@ -18,11 +18,19 @@ public:
   ~Deque() { delete[]array_; }
 
 public:
-  int Size() { return back_ >= front_ ? back_ - front_ : back_ - front_ + capacity_; }
-  int Capacity() { return capacity_; }
-  bool IsEmpty() { return Size() == 0; }
-  bool IsFull() { return Size() == capacity_ - 1; }
+  int Size() const { return back_ >= front_ ? back_ - front_ : back_ - front_ + capacity_; }
+  int Capacity() const { return capacity_; }
+  bool IsEmpty() const { return Size() == 0; }
+  bool IsFull() const { return Size() == capacity_ - 1; }
   KeyType & GetAt(int idx)
+  {
+    if (CheckIndex(idx))
+      return array_[I2P(idx)];
+    else
+      throw exception();
+  }
+
+  KeyType GetAt(int idx) const
   {
     if (CheckIndex(idx))
       return array_[I2P(idx)];
@@ -76,15 +84,15 @@ public:
   }
 
 private:
-  int Pos(int pos) { return pos % capacity_; } // circular position
-  int Next(int pos) { return Pos(pos + 1); } // next position
-  int Prev(int pos) { return Pos(capacity_ + pos - 1); } // previous position
-  int I2P(int idx) { return Pos(front_ + idx); } // index to position
+  int Pos(int pos) const { return pos % capacity_; } // circular position
+  int Next(int pos) const { return Pos(pos + 1); } // next position
+  int Prev(int pos) const { return Pos(capacity_ + pos - 1); } // previous position
+  int I2P(int idx) const { return Pos(front_ + idx); } // index to position
 
-  bool CheckIndex(int idx) { return 0 <= idx && idx < Size(); }
-  bool CheckPosition(int pos) { return 0 <= pos && pos < capacity_; }
+  bool CheckIndex(int idx) const { return 0 <= idx && idx < Size(); }
+  bool CheckPosition(int pos) const { return 0 <= pos && pos < capacity_; }
 
-  int CalculateCapacity(int maxSize)
+  int CalculateCapacity(int maxSize) const
   {
     int capacity = DEFAULT_CAPACITY;
     while (capacity < maxSize + 1) capacity *= 2; // capacity >= size + 1
@@ -98,7 +106,7 @@ private:
     int newCapacity = CalculateCapacity(maxSize);
 
     // copy to newArray
-    int *newArray = new KeyType[newCapacity];
+    KeyType *newArray = new KeyType[newCapacity];
     int oldSize = Size();
     for (int i = 0; i < oldSize; ++i)
       newArray[i] = GetAt(i);
@@ -118,33 +126,33 @@ private:
 };
 
 template<class KeyType>
-class Stack : protected Deque<KeyType>
+class Stack : public Deque<KeyType>
 {
 public:
   Stack(int size = 0, const KeyType * array = NULL)
     : Deque<KeyType>(size, array) {}
 
 public:
-  int Size() { return Deque<KeyType>::Size(); }
-  bool IsEmpty() { return Deque<KeyType>::IsEmpty(); }
+  int Size() const { return Deque<KeyType>::Size(); }
+  bool IsEmpty() const { return Deque<KeyType>::IsEmpty(); }
 
 public:
   void Push(const KeyType &x) { Deque<KeyType>::PushBack(x); }
-  KeyType Peek()  { return Deque<KeyType>::PeekBack(); }
+  KeyType Peek() { return Deque<KeyType>::PeekBack(); }
   KeyType Pop()  { return Deque<KeyType>::PopBack(); }
 
 };
 
 template<class KeyType>
-class Queue: protected Deque<KeyType>
+class Queue: public Deque<KeyType>
 {
 public:
   Queue(int size = 0, const KeyType * array = NULL)
     : Deque<KeyType>(size, array) {}
 
 public:
-  int Size() { return Deque<KeyType>::Size(); }
-  bool IsEmpty() { return Deque<KeyType>::IsEmpty(); }
+  int Size() const { return Deque<KeyType>::Size(); }
+  bool IsEmpty() const { return Deque<KeyType>::IsEmpty(); }
 
 public:
   void Add(const KeyType &x) { Deque<KeyType>::PushBack(x); }
@@ -152,3 +160,11 @@ public:
   KeyType Delete()  { return Deque<KeyType>::PopFront(); }
 
 };
+
+template<class KeyType>
+std::ostream & operator<<(std::ostream & os, const Deque<KeyType> & deque)
+{
+  for (int i = 0; i < deque.Size(); ++i)
+    os << deque.GetAt(i) << '\n';
+  return os;
+}

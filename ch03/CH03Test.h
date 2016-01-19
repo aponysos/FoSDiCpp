@@ -10,5 +10,6 @@ protected:
   void testDeque(void);
   void testStack(void);
   void testQueue(void);
+  void testMazingProblem(void);
 
 };

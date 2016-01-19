@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CH03Test.h"
 #include "Container.h"
+#include "mazing_problem.h"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ CH03Test::CH03Test(void)
   TEST_ADD(CH03Test::testDeque);
   TEST_ADD(CH03Test::testStack);
   TEST_ADD(CH03Test::testQueue);
+  TEST_ADD(CH03Test::testMazingProblem);
 }
 
 void CH03Test::testHelloWorld(void)
@@ -84,4 +86,12 @@ void CH03Test::testQueue(void)
   TEST_ASSERT(que.Delete() == 0);
   TEST_ASSERT(que.Size() == 2);
   TEST_ASSERT(que.Delete() == 1);
+}
+
+void CH03Test::testMazingProblem(void)
+{
+  Maze m;
+  m.Load("maze.txt");
+  m.Path(OFF(0, 0), OFF(15, 15));
+  m.PrintPath();
 }
