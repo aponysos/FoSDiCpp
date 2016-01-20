@@ -42,30 +42,46 @@ void Maze::Load(const char * file)
   int i = 0;
   while (ifs >> line)
   {
-    for (int j = 0; j < (int)line.length(); ++j)
+    for (int j = 0; j < (int)line.length() && j < p_; ++j)
       maze_[i++] = (line.at(j) == '0' ? 0 : 1);
   }
 
   ifs.close();
 }
 
-void Maze::Path(Offset entrance, Offset exit)
+bool Maze::Path(Offset entrance, Offset exit)
 {
   path_.Push(MOVE2(entrance, E));
 
   while (!path_.IsEmpty())
   {
     Move move = path_.Pop();
-    while (move.second <= NW)
+    int i = move.first.first;
+    int j = move.second.second;
+    int d = move.second;
+    while (d <= NW)
     {
-      int g = move.first.first + MOVE_VECTOR[move.second][0];
-      int h = move.first.second + MOVE_VECTOR[move.second][1];
-      if (OFF(g, h) == exit)
-        return;
+      int g = i + MOVE_VECTOR[d][0];
+      int h = j + MOVE_VECTOR[d][1];
+      Offset next = OFF(g, h); 
+      if (next == exit)
+      {
+        path_.Push(move);
+        return true;
+      }
+      if (CheckBoundary(next) && MazeAt(next) == 0 && MarkAt(next) == 0)
+      {
+        MarkAt(next) = 1;
+        path_.Push(move);
+        path_.Push(next);
+        break;
+      }
+      else
+        ++d;
     }
   }
-
-  path_.Push(MOVE2(exit, N));
+  
+  return false;
 }
 
 ostream & operator<<(ostream & os, const Maze::Direction & d)
@@ -88,4 +104,24 @@ ostream & operator<<(ostream & os, const Maze::Move & m)
 void Maze::PrintPath()
 {
   cout << endl << path_ << endl;
+}
+
+bool CheckBoundary(Offset off)
+{
+  return 0 <= off.first && off.first < m_ && 0 <= off.second && off.second < p_;
+}
+
+int Offset2Index(Offset off)
+{
+  return off.first * p_ + off.second;
+}
+
+int & Maze::MazeAt(Offset off)
+{
+  return maze_[Offset2Index(off)];
+}
+
+int & Maze::MarkAt(Offset off)
+{
+  return mark_[Offset2Index(off)];
 }

@@ -22,6 +22,12 @@ public:
   void PrintPath();
 
 private:
+  bool CheckBoundary(Offset off);
+  int Offset2Index(Offset off);
+  int & MazeAt(Offset off);
+  int & MarkAt(Offset off);
+
+private:
   int *maze_;
   int *mark_;
   Stack<Move> path_;
