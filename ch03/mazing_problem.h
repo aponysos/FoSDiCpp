@@ -18,7 +18,7 @@ public:
 
 public:
   void Load(const char * file);
-  void Path(Offset entrance, Offset exit);
+  bool Path(Offset entrance, Offset exit);
   void PrintPath();
 
 private:

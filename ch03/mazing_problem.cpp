@@ -51,13 +51,13 @@ void Maze::Load(const char * file)
 
 bool Maze::Path(Offset entrance, Offset exit)
 {
-  path_.Push(MOVE2(entrance, E));
+  path_.Push(MOVE2(entrance, N));
 
   while (!path_.IsEmpty())
   {
     Move move = path_.Pop();
     int i = move.first.first;
-    int j = move.second.second;
+    int j = move.first.second;
     int d = move.second;
     while (d <= NW)
     {
@@ -72,8 +72,8 @@ bool Maze::Path(Offset entrance, Offset exit)
       if (CheckBoundary(next) && MazeAt(next) == 0 && MarkAt(next) == 0)
       {
         MarkAt(next) = 1;
-        path_.Push(move);
-        path_.Push(next);
+        path_.Push(MOVE3(i, j, (Direction)d));
+        path_.Push(MOVE2(next, N));
         break;
       }
       else
@@ -106,12 +106,12 @@ void Maze::PrintPath()
   cout << endl << path_ << endl;
 }
 
-bool CheckBoundary(Offset off)
+bool Maze::CheckBoundary(Offset off)
 {
   return 0 <= off.first && off.first < m_ && 0 <= off.second && off.second < p_;
 }
 
-int Offset2Index(Offset off)
+int Maze::Offset2Index(Offset off)
 {
   return off.first * p_ + off.second;
 }

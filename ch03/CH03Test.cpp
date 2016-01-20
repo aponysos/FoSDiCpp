@@ -92,6 +92,6 @@ void CH03Test::testMazingProblem(void)
 {
   Maze m;
   m.Load("maze.txt");
-  TEST_ASSERT(m.Path(OFF(0, 0), OFF(15, 15)) == true);
+  TEST_ASSERT(m.Path(OFF(0, 0), OFF(11, 14)) == true);
   m.PrintPath();
 }
