@@ -2,6 +2,7 @@
 #include "CH03Test.h"
 #include "Container.h"
 #include "mazing_problem.h"
+#include "expression_evaluation.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ CH03Test::CH03Test(void)
   TEST_ADD(CH03Test::testStack);
   TEST_ADD(CH03Test::testQueue);
   TEST_ADD(CH03Test::testMazingProblem);
+  TEST_ADD(CH03Test::testExpressionEvaluation);
 }
 
 void CH03Test::testHelloWorld(void)
@@ -94,4 +96,11 @@ void CH03Test::testMazingProblem(void)
   m.Load("maze.txt");
   TEST_ASSERT(m.Path(OFF(0, 0), OFF(11, 14)) == true);
   m.PrintPath();
+}
+
+void CH03Test::testExpressionEvaluation(void)
+{
+  Expression ex("7+5*(2+4)/3-9");
+  TEST_ASSERT(ex.Infix2Postfix() == "7524+*3/+9-");
+  TEST_ASSERT(ex.Evaluate() == 8);
 }

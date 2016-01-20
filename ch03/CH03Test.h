@@ -11,5 +11,6 @@ protected:
   void testStack(void);
   void testQueue(void);
   void testMazingProblem(void);
+  void testExpressionEvaluation(void);
 
 };
