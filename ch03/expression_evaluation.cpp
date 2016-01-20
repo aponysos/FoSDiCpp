@@ -31,6 +31,9 @@ std::string Expression::Infix2Postfix(void)
     }
   }
 
+  while (!stack.IsEmpty())
+    postfix_.push_back(stack.Pop());
+
   return postfix_;
 }
 
