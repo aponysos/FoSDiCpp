@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ch02_knight_tour_problem", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ch03", "ch03\ch03.vcxproj", "{0A7BB77A-8231-441C-96AC-FC6CA17E8EE4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ch04", "ch04\ch04.vcxproj", "{31244E2A-87E8-4A27-9164-D2DCA030670D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{0A7BB77A-8231-441C-96AC-FC6CA17E8EE4}.Debug|Win32.Build.0 = Debug|Win32
 		{0A7BB77A-8231-441C-96AC-FC6CA17E8EE4}.Release|Win32.ActiveCfg = Release|Win32
 		{0A7BB77A-8231-441C-96AC-FC6CA17E8EE4}.Release|Win32.Build.0 = Release|Win32
+		{31244E2A-87E8-4A27-9164-D2DCA030670D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{31244E2A-87E8-4A27-9164-D2DCA030670D}.Debug|Win32.Build.0 = Debug|Win32
+		{31244E2A-87E8-4A27-9164-D2DCA030670D}.Release|Win32.ActiveCfg = Release|Win32
+		{31244E2A-87E8-4A27-9164-D2DCA030670D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
