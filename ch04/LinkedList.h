@@ -51,6 +51,7 @@ public:
 
 public:
   bool IsEmpty() const { return head_->rlink_ == head_; }
+  void Dump(std::ostream & os) const;
 
 public:
   IteratorType Begin() const { return IteratorType(head_->rlink_); }
@@ -68,8 +69,8 @@ public:
 
 public:
   Type Delete(IteratorType & i);
-  Type DeleteBack() { return Delete(head_->llink_); }
-  Type DeleteFront() { return Delete(head_->rlink_); }
+  Type DeleteBack() { return Delete(--End()); }
+  Type DeleteFront() { return Delete(Begin()); }
 
 private:
   NodeType *head_;
@@ -147,10 +148,16 @@ List<Type>::~List()
 }
 
 template <class Type>
+void List<Type>::Dump(std::ostream & os) const
+{
+  for (auto i = Begin(); i != End(); ++i)
+    os << *i << '\n';
+}
+
+template <class Type>
 std::ostream & operator<<(std::ostream & os, const List<Type> & l)
 {
-  for (auto i = l.Begin(); i != l.End(); ++i)
-    os << *i << '\n';
+  l.Dump(os);
   return os;
 }
 
@@ -199,4 +206,50 @@ Type List<Type>::Delete(IteratorType & i)
   Type ret = i.cur_->data_;
   delete i.cur_;
   return ret;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+template <class Type>
+class Stack
+{
+public:
+  void Dump(std::ostream & os) const { l_.Dump(os);}
+
+public:
+  void Push(const Type & x) { l_.InsertBack(x); }
+  Type Peek() const { return l_.PeekBack(); }
+  Type Pop() { return l_.DeleteBack(); }
+
+private:
+  List<Type> l_;
+};
+
+template <class Type>
+std::ostream & operator<<(std::ostream & os, const Stack<Type> & s)
+{
+  s.Dump(os);
+  return os;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+template <class Type>
+class Queue
+{
+public:
+  void Dump(std::ostream & os) const { l_.Dump(os); }
+
+public:
+  void Add(const Type & x) { l_.InsertBack(x); }
+  Type Peek() const { return l_.PeekFront(); }
+  Type Delete() { return l_.DeleteFront(); }
+
+private:
+  List<Type> l_;
+};
+
+template <class Type>
+std::ostream & operator<<(std::ostream & os, const Queue<Type> & s)
+{
+  s.Dump(os);
+  return os;
 }

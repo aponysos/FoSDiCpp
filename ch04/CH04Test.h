@@ -8,5 +8,6 @@ public:
 protected:
   void testHelloWorld(void);
   void testLinkedList(void);
+  void testLinkedStackQueue(void);
 
 };
