@@ -17,16 +17,34 @@ void CH04Test::testHelloWorld(void)
 
 void CH04Test::testLinkedList(void)
 {
-  int ai[] = { 1, 2, 3 };
-  List<int> l;
-  l.Attach(ai, 3);
-  ListIterator<int> i(l);
-  TEST_ASSERT(i.IsNull() == false);
-  TEST_ASSERT(i.NextIsNull() == false);
-  TEST_ASSERT(i.Cur() == 1);
-  i.Next();
+  List<int> l1;
+  TEST_ASSERT(l1.IsEmpty());
+  l1.InsertBack(1);
+  l1.InsertBack(2);
+  l1.InsertBack(3);
+  TEST_ASSERT(!l1.IsEmpty());
+  List<int> l2;
+  l2.InsertFront(3);
+  l2.InsertFront(2);
+  l2.InsertFront(1);
+  cout << endl << l1 << endl;
+  cout << endl << l2 << endl;
+  TEST_ASSERT(l1 == l2);
+
+  ListIterator<int> i = l1.Begin();
+  TEST_ASSERT(*i == 1);
+  ++i;
   TEST_ASSERT(*i++ == 2);
   TEST_ASSERT(*i == 3);
-  TEST_ASSERT(i.NextIsNull() == true);
-  TEST_ASSERT((++i).IsNull() == true);
+
+  i = l2.End();
+  TEST_ASSERT(*(--i) == 3);
+  --i;
+  TEST_ASSERT(*i-- == 2);
+  TEST_ASSERT(*i == 1);
+
+  TEST_ASSERT(l1.Delete(l1.Begin()) == 1);
+  TEST_ASSERT(l1.PeekFront() == 2);
+  TEST_ASSERT(l1.Delete(--l1.End()) == 3);
+  TEST_ASSERT(l1.PeekBack() == 2);
 }

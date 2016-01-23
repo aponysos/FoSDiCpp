@@ -2,69 +2,80 @@
 #pragma once
 
 template <class Type> class List;
-template <class Type> class ListIterator;
+template <class Type> struct ListIterator;
 
 template <class Type>
 class ListNode
 {
   friend class List<Type> ;
-  friend class ListIterator<Type>;
+  friend struct ListIterator<Type>;
 
 public:
-  ListNode(const Type & data) : data_(data), link_(NULL) {}
+  ListNode(const Type & data) : data_(data), llink_(NULL), rlink_(NULL) {}
 
 private:
   Type data_;
-  ListNode *link_;
+  ListNode *llink_;
+  ListNode *rlink_;
+};
+
+template <class Type>
+struct ListIterator
+{
+  typedef ListNode<Type> NodeType;
+
+public:
+  ListIterator(NodeType * cur) : cur_(cur) {}
+  ListIterator<Type> & operator=(const ListIterator<Type> & i) { cur_ = i.cur_; return *this; }
+
+public:
+  Type & Cur() { return cur_->data_; }
+  void Next() { cur_ = cur_->rlink_; }
+  void Prev() { cur_ = cur_->llink_; }
+
+public:
+  NodeType * cur_;
 };
 
 template <class Type>
 class List
 {
-  friend class ListIterator<Type>;
+  friend struct ListIterator<Type>;
+
+  typedef ListNode<Type> NodeType;
+  typedef ListIterator<Type> IteratorType;
 
 public:
-  List() : first_(NULL), last_(NULL) {}
+  List();
+  ~List();
 
 public:
-  bool IsEmpty() const { return first_ == NULL; }
+  bool IsEmpty() const { return head_->rlink_ == head_; }
 
 public:
-  void Attach(const Type & data);
-  void Attach(const Type * array, int size);
+  IteratorType Begin() const { return IteratorType(head_->rlink_); }
+  IteratorType End() const { return IteratorType(head_); }
+
+public:
+  void InsertBefore(IteratorType & i, const Type & data);
+  void InsertAfter(IteratorType & i, const Type & data);
+  void InsertBack(const Type & data) { InsertBefore(End(), data); }
+  void InsertFront(const Type & data) { InsertAfter(End(), data); }
+
+public:
+  Type PeekBack() const { return head_->llink_->data_; }
+  Type PeekFront() const { return head_->rlink_->data_; }
+
+public:
+  Type Delete(IteratorType & i);
+  Type DeleteBack() { return Delete(head_->llink_); }
+  Type DeleteFront() { return Delete(head_->rlink_); }
 
 private:
-  ListNode<Type> *first_;
-  ListNode<Type> *last_;
+  NodeType *head_;
 };
 
-template <class Type>
-class ListIterator
-{
-public:
-  ListIterator(const List<Type> & list) : list_(list), cur_(list.first_) {}
-  
-public:
-  bool IsNull() const { return cur_ == NULL; }
-  bool NextIsNull() const { return cur_->link_ == NULL; }
-
-public:
-  Type & Cur()
-  {
-    if (IsNull()) throw std::exception();
-    else return cur_->data_;
-  }
-  void Next()
-  {
-    if (IsNull()) throw std::exception();
-    else cur_ = cur_->link_;
-  }
-
-private:
-  ListNode<Type> * cur_;
-  const List<Type> &list_;
-};
-
+///////////////////////////////////////////////////////////////////////////////////////////////
 template <class Type>
 Type & operator*(ListIterator<Type> & i)
 {
@@ -87,22 +98,105 @@ ListIterator<Type> operator++(ListIterator<Type> & i, int)
 }
 
 template <class Type>
-void List<Type>::Attach(const Type & data)
+ListIterator<Type> & operator--(ListIterator<Type> & i)
 {
-  ListNode<Type> *newNode = new ListNode<Type>(data);
-  if (IsEmpty())
-    first_ = last_ = newNode;
-  else {
-    last_->link_ = newNode;
-    last_ = newNode;
+  i.Prev();
+  return i;
+}
+
+template <class Type>
+ListIterator<Type> operator--(ListIterator<Type> & i, int)
+{
+  ListIterator<Type> ii = i;
+  i.Prev();
+  return ii;
+}
+
+template <class Type>
+bool operator==(const ListIterator<Type> & i1, const ListIterator<Type> & i2)
+{
+  return i1.cur_ == i2.cur_;
+}
+
+template <class Type>
+bool operator!=(const ListIterator<Type> & i1, const ListIterator<Type> & i2)
+{
+  return i1.cur_ != i2.cur_;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+template <class Type>
+List<Type>::List()
+  : head_(NULL)
+{
+  head_ = new NodeType(Type());
+  head_->llink_ = head_->rlink_ = head_;
+}
+
+template <class Type>
+List<Type>::~List()
+{
+  NodeType * cur = head_;
+  NodeType * next = NULL;
+  while (next != head_)
+  {
+    next = cur->rlink_;
+    delete cur;
+    cur = next;
   }
 }
 
 template <class Type>
-void List<Type>::Attach(const Type * array, int size)
+std::ostream & operator<<(std::ostream & os, const List<Type> & l)
 {
-  if (size <= 0) return;
-  if (array == NULL) throw std::exception();
-  for (int i = 0; i < size; ++i)
-    Attach(array[i]);
+  for (auto i = l.Begin(); i != l.End(); ++i)
+    os << *i << '\n';
+  return os;
+}
+
+template <class Type>
+bool operator==(const List<Type> & l1, const List<Type> & l2)
+{
+  auto i1 = l1.Begin(), i2 = l2.Begin();
+  for (; i1 != l1.End() && i2 != l2.End(); ++i1, ++i2)
+    if (*i1 != *i2) return false;
+
+  if (i1 != l1.End() || i2 != l2.End())
+    return false;
+
+  return true;
+}
+
+template <class Type>
+void List<Type>::InsertAfter(IteratorType & i, const Type & data)
+{
+  NodeType *newNode = new NodeType(data);
+  newNode->rlink_ = i.cur_->rlink_;
+  newNode->llink_ = i.cur_;
+  i.cur_->rlink_->llink_ = newNode;
+  i.cur_->rlink_ = newNode;
+}
+
+template <class Type>
+void List<Type>::InsertBefore(IteratorType & i, const Type & data)
+{
+  NodeType *newNode = new NodeType(data);
+  newNode->llink_ = i.cur_->llink_;
+  newNode->rlink_ = i.cur_;
+  i.cur_->llink_->rlink_ = newNode;
+  i.cur_->llink_ = newNode;
+}
+
+template <class Type>
+Type List<Type>::Delete(IteratorType & i)
+{
+  if (IsEmpty()) throw exception();
+
+  NodeType & cur = *(i.cur_);
+  cur.llink_->rlink_ = cur.rlink_;
+  cur.rlink_->llink_ = cur.llink_;
+
+  Type ret = i.cur_->data_;
+  delete i.cur_;
+  return ret;
 }
