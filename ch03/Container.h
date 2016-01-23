@@ -17,6 +17,8 @@ public:
 
   ~Deque() { delete[]array_; }
 
+  void Dump(std::ostream & os) const;
+
 public:
   int Size() const { return back_ >= front_ ? back_ - front_ : back_ - front_ + capacity_; }
   int Capacity() const { return capacity_; }
@@ -126,45 +128,73 @@ private:
 };
 
 template<class KeyType>
-class Stack : public Deque<KeyType>
+class Stack
 {
 public:
   Stack(int size = 0, const KeyType * array = NULL)
-    : Deque<KeyType>(size, array) {}
+    : deque_(size, array) {}
+
+  void Dump(std::ostream & os) const { deque_.Dump(os); }
 
 public:
-  int Size() const { return Deque<KeyType>::Size(); }
-  bool IsEmpty() const { return Deque<KeyType>::IsEmpty(); }
+  int Size() const { return deque_.Size(); }
+  bool IsEmpty() const { return deque_.IsEmpty(); }
 
 public:
-  void Push(const KeyType &x) { Deque<KeyType>::PushBack(x); }
-  KeyType Peek() { return Deque<KeyType>::PeekBack(); }
-  KeyType Pop()  { return Deque<KeyType>::PopBack(); }
+  void Push(const KeyType &x) { deque_.PushBack(x); }
+  KeyType Peek() { return deque_.PeekBack(); }
+  KeyType Pop()  { return deque_.PopBack(); }
 
+private:
+  Deque<KeyType> deque_;
 };
 
 template<class KeyType>
-class Queue: public Deque<KeyType>
+class Queue
 {
 public:
   Queue(int size = 0, const KeyType * array = NULL)
-    : Deque<KeyType>(size, array) {}
+    : deque_(size, array) {}
+
+  void Dump(std::ostream & os) const { deque_.Dump(os); }
 
 public:
-  int Size() const { return Deque<KeyType>::Size(); }
-  bool IsEmpty() const { return Deque<KeyType>::IsEmpty(); }
+  int Size() const { return deque_.Size(); }
+  bool IsEmpty() const { return deque_.IsEmpty(); }
 
 public:
-  void Add(const KeyType &x) { Deque<KeyType>::PushBack(x); }
-  KeyType Peek()  { return Deque<KeyType>::PeekFront(); }
-  KeyType Delete()  { return Deque<KeyType>::PopFront(); }
+  void Add(const KeyType &x) { deque_.PushBack(x); }
+  KeyType Peek()  { return deque_.PeekFront(); }
+  KeyType Delete()  { return deque_.PopFront(); }
 
+private:
+  Deque<KeyType> deque_;
 };
+
+template<class KeyType>
+void Deque<KeyType>::Dump(std::ostream & os) const
+{
+  for (int i = 0; i < Size(); ++i)
+    os << GetAt(i) << '\n';
+}
 
 template<class KeyType>
 std::ostream & operator<<(std::ostream & os, const Deque<KeyType> & deque)
 {
-  for (int i = 0; i < deque.Size(); ++i)
-    os << deque.GetAt(i) << '\n';
+  deque.Dump(os);
+  return os;
+}
+
+template<class KeyType>
+std::ostream & operator<<(std::ostream & os, const Stack<KeyType> & stack)
+{
+  stack.Dump(os);
+  return os;
+}
+
+template<class KeyType>
+std::ostream & operator<<(std::ostream & os, const Queue<KeyType> & queue)
+{
+  queue.Dump(os);
   return os;
 }

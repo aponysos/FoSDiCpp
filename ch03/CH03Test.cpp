@@ -73,6 +73,7 @@ void CH03Test::testStack(void)
   TEST_ASSERT(stk.Size() == 1);
   stk.Push(1);
   stk.Push(2);
+  cout << endl << stk << endl;
   TEST_ASSERT(stk.Pop() == 2);
   TEST_ASSERT(stk.Size() == 2);
   TEST_ASSERT(stk.Pop() == 1);
@@ -85,6 +86,7 @@ void CH03Test::testQueue(void)
   TEST_ASSERT(que.Size() == 1);
   que.Add(1);
   que.Add(2);
+  cout << endl << que << endl;
   TEST_ASSERT(que.Delete() == 0);
   TEST_ASSERT(que.Size() == 2);
   TEST_ASSERT(que.Delete() == 1);
