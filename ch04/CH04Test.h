@@ -9,5 +9,7 @@ protected:
   void testHelloWorld(void);
   void testLinkedList(void);
   void testLinkedStackQueue(void);
+  void testPolynomial(void);
+  void testSparseMatrix(void);
 
 };

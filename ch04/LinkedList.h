@@ -48,6 +48,8 @@ class List
 public:
   List();
   ~List();
+  List(const List<Type> & l);
+  List<Type> & operator=(const List<Type> & l);
 
 public:
   bool IsEmpty() const { return head_->rlink_ == head_; }
@@ -148,6 +150,24 @@ List<Type>::~List()
 }
 
 template <class Type>
+List<Type>::List(const List<Type> & l)
+  : List<Type>()
+{
+  auto i = l.Begin();
+  while (i != l.End())
+    InsertBack(*i++);
+}
+
+template <class Type>
+List<Type> & List<Type>::operator=(const List<Type> & l)
+{
+  auto i = l.Begin();
+  while (i != l.End())
+    InsertBack(*i++);
+  return *this;
+}
+
+template <class Type>
 void List<Type>::Dump(std::ostream & os) const
 {
   for (auto i = Begin(); i != End(); ++i)
@@ -199,12 +219,12 @@ Type List<Type>::Delete(IteratorType & i)
 {
   if (IsEmpty()) throw exception();
 
-  NodeType & cur = *(i.cur_);
+  NodeType & cur = *(i++.cur_);
   cur.llink_->rlink_ = cur.rlink_;
   cur.rlink_->llink_ = cur.llink_;
 
-  Type ret = i.cur_->data_;
-  delete i.cur_;
+  Type ret = cur.data_;
+  delete &cur;
   return ret;
 }
 
