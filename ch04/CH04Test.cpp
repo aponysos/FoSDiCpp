@@ -1,7 +1,9 @@
 #include "stdafx.h"
+#include <fstream>
 #include "CH04Test.h"
 #include "LinkedList.h"
 #include "Polynomial.h"
+#include "equivalence.h"
 #include "SparseMatrix.h"
 
 using namespace std;
@@ -12,6 +14,7 @@ CH04Test::CH04Test(void)
   TEST_ADD(CH04Test::testLinkedList);
   TEST_ADD(CH04Test::testLinkedStackQueue);
   TEST_ADD(CH04Test::testPolynomial);
+  TEST_ADD(CH04Test::testEquivalenceClass);
   //TEST_ADD(CH04Test::testSparseMatrix);
 }
 
@@ -108,6 +111,17 @@ void CH04Test::testPolynomial(void)
   cout << d << endl;
   TEST_ASSERT(d.Eval(1) == 23);
   TEST_ASSERT(d.Eval(2) == 128);
+}
+
+void CH04Test::testEquivalenceClass(void)
+{
+  EquivalenceClass ec;
+  ifstream inFile("equivalence.txt");
+  ec.Input(inFile);
+  inFile.close();
+  cout << endl;
+  ec.Output(cout);
+  cout << endl;
 }
 
 void CH04Test::testSparseMatrix(void)

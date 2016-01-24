@@ -10,6 +10,7 @@ protected:
   void testLinkedList(void);
   void testLinkedStackQueue(void);
   void testPolynomial(void);
+  void testEquivalenceClass(void);
   void testSparseMatrix(void);
 
 };

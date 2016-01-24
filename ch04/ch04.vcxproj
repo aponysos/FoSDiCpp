@@ -79,10 +79,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="equivalence.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CH04Test.h" />
+    <ClInclude Include="equivalence.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Polynomial.h" />
     <ClInclude Include="SparseMatrix.h" />
@@ -92,6 +94,7 @@
   <ItemGroup>
     <ClCompile Include="ch04.cpp" />
     <ClCompile Include="CH04Test.cpp" />
+    <ClCompile Include="equivalence.cpp" />
     <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="SparseMatrix.cpp" />
     <ClCompile Include="stdafx.cpp">

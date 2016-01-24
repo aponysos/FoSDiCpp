@@ -217,7 +217,7 @@ void List<Type>::InsertBefore(IteratorType & i, const Type & data)
 template <class Type>
 Type List<Type>::Delete(IteratorType & i)
 {
-  if (IsEmpty()) throw exception();
+  if (IsEmpty()) throw std::exception();
 
   NodeType & cur = *(i++.cur_);
   cur.llink_->rlink_ = cur.rlink_;
@@ -233,7 +233,8 @@ template <class Type>
 class Stack
 {
 public:
-  void Dump(std::ostream & os) const { l_.Dump(os);}
+  void Dump(std::ostream & os) const { l_.Dump(os); }
+  bool IsEmpty() const { return l_.IsEmpty(); }
 
 public:
   void Push(const Type & x) { l_.InsertBack(x); }
@@ -257,6 +258,7 @@ class Queue
 {
 public:
   void Dump(std::ostream & os) const { l_.Dump(os); }
+  bool IsEmpty() const { return l_.IsEmpty(); }
 
 public:
   void Add(const Type & x) { l_.InsertBack(x); }
