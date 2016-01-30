@@ -1,44 +1,39 @@
 // 4.8 SPARSE MATRICES
 #pragma once
 
-class SparseMatrix;
+class Matrix;
 
-class MatrixTerm
+struct Triple { int val, row, col; };
+
+class MatrixNode
 {
-  friend class SparseMatrix;
+  friend class Matrix;
+  friend std::istream & operator>>(std::istream & is, Matrix & matrix);
+  friend std::ostream & operator<<(std::ostream & os, Matrix & matrix);
 
 private:
-  int row, col, value;
+  MatrixNode(const Triple &tri, bool isHead = false);
+
+private:
+  MatrixNode *down_, *right_;
+  bool isHead_;
+  union {
+    MatrixNode *next_;
+    Triple tri_;
+  };
 };
 
-class SparseMatrix
+typedef MatrixNode * MatrixNodePtr;
+
+class Matrix
 {
-public:
-  SparseMatrix(int r = -1, int c = -1);
-  ~SparseMatrix();
-
-  SparseMatrix(const SparseMatrix & sm);
-  SparseMatrix & operator=(const SparseMatrix & sm);
-  bool operator==(const SparseMatrix & sm);
+  friend std::istream & operator>>(std::istream & is, Matrix & matrix);
+  friend std::ostream & operator<<(std::ostream & os, Matrix & matrix);
 
 public:
-  void NewTerm(int r, int c, int v, int pos);
-  void NewTerm(int r, int c, int v);
-  void NewTerm(const MatrixTerm & mt);
-  bool HasTerm(int r, int c, int v) const;
-  bool HasTerm(const MatrixTerm & mt) const;
-
-public:
-  SparseMatrix Transpose();
-  SparseMatrix FastTranspose() const;
-
-public:
-  SparseMatrix & operator*=(const SparseMatrix & b);
-  int StoreSum(int sum, int & lastInResult, int r, int c);
+  ~Matrix();
 
 private:
-  static const int MAX_TERMS = 128;
-  MatrixTerm smArray[MAX_TERMS];
-  int rows, cols, terms;
+  MatrixNodePtr headnode_;
 };
 

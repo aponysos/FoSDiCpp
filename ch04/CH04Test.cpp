@@ -15,7 +15,7 @@ CH04Test::CH04Test(void)
   TEST_ADD(CH04Test::testLinkedStackQueue);
   TEST_ADD(CH04Test::testPolynomial);
   TEST_ADD(CH04Test::testEquivalenceClass);
-  //TEST_ADD(CH04Test::testSparseMatrix);
+  TEST_ADD(CH04Test::testSparseMatrix);
 }
 
 void CH04Test::testHelloWorld(void)
@@ -126,47 +126,9 @@ void CH04Test::testEquivalenceClass(void)
 
 void CH04Test::testSparseMatrix(void)
 {
-  SparseMatrix sm1(6, 6);
-  sm1.NewTerm(0, 0, 15);
-  sm1.NewTerm(0, 3, 22);
-  sm1.NewTerm(0, 5, -15);
-  sm1.NewTerm(1, 1, 11);
-  sm1.NewTerm(1, 2, 3);
-  sm1.NewTerm(2, 3, -6);
-  sm1.NewTerm(4, 0, 91);
-  sm1.NewTerm(5, 2, 28);
-  TEST_ASSERT(sm1 == sm1);
-
-  SparseMatrix sm2(6, 6);
-  sm2.NewTerm(0, 0, 15);
-  sm2.NewTerm(0, 4, 91);
-  sm2.NewTerm(1, 1, 11);
-  sm2.NewTerm(2, 1, 3);
-  sm2.NewTerm(2, 5, 28);
-  sm2.NewTerm(3, 0, 22);
-  sm2.NewTerm(3, 2, -6);
-  sm2.NewTerm(5, 0, -15);
-  TEST_ASSERT(sm2 == sm1.Transpose());
-  TEST_ASSERT(sm2 == sm1.FastTranspose());
-
-  SparseMatrix sm3(3, 3);
-  sm3.NewTerm(0, 0, 1);
-  sm3.NewTerm(1, 0, 1);
-  sm3.NewTerm(2, 0, 1);
-  SparseMatrix sm4(3, 3);
-  sm4.NewTerm(0, 0, 1);
-  sm4.NewTerm(0, 1, 1);
-  sm4.NewTerm(0, 2, 1);
-  SparseMatrix sm5(3, 3);
-  sm5.NewTerm(0, 0, 1);
-  sm5.NewTerm(0, 1, 1);
-  sm5.NewTerm(0, 2, 1);
-  sm5.NewTerm(1, 0, 1);
-  sm5.NewTerm(1, 1, 1);
-  sm5.NewTerm(1, 2, 1);
-  sm5.NewTerm(2, 0, 1);
-  sm5.NewTerm(2, 1, 1);
-  sm5.NewTerm(2, 2, 1);
-  sm3 *= sm4;
-  TEST_ASSERT(sm3 == sm5);
+  Matrix m;
+  ifstream inFile("matrix.txt");
+  inFile >> m;
+  inFile.close();
+  cout << endl << m << endl;
 }

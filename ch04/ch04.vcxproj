@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="equivalence.txt" />
+    <Text Include="matrix.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

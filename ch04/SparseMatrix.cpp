@@ -1,201 +1,154 @@
 #include "stdafx.h"
 #include "SparseMatrix.h"
-#include "boost\smart_ptr\scoped_array.hpp"
+#include <iomanip>
 
 using namespace std;
 
-//static 
-const int SparseMatrix::MAX_TERMS;
-
-SparseMatrix::SparseMatrix(int r, int c)
-  :rows(r), cols(c), terms(0)
+MatrixNode::MatrixNode(const Triple &tri, bool isHead)
+  : isHead_(isHead)
 {
-}
-
-SparseMatrix::~SparseMatrix()
-{
-}
-
-SparseMatrix::SparseMatrix(const SparseMatrix & sm)
-  :rows(sm.rows), cols(sm.cols), terms(sm.terms)
-{
-  for (int i = 0; i < terms; ++i)
-    smArray[i] = sm.smArray[i];
-}
-
-SparseMatrix & SparseMatrix::operator=(const SparseMatrix & sm)
-{
-  rows = sm.rows;
-  cols = sm.cols;
-  terms = sm.terms;
-  for (int i = 0; i < terms; ++i)
-    smArray[i] = sm.smArray[i];
-
-  return *this;
-}
-
-bool SparseMatrix::operator==(const SparseMatrix & sm)
-{
-  if (rows == sm.rows && cols == sm.cols && terms == sm.terms)
-  {
-    for (int i = 0; i < terms; ++i)
-      if (!sm.HasTerm(smArray[i]))
-        return false;
-    return true;
-  }
-  else 
-    return false;
-
-  return true;
-}
-
-void SparseMatrix::NewTerm(int r, int c, int v, int pos)
-{
-  smArray[pos].row = r;
-  smArray[pos].col = c;
-  smArray[pos].value = v;
-}
-
-void SparseMatrix::NewTerm(int r, int c, int v)
-{
-  if (terms >= MAX_TERMS) {
-    cerr << "Too many terms in sparse matrix" << endl;
-    return;
-  }
-
-  NewTerm(r, c, v, terms++);
-}
-void SparseMatrix::NewTerm(const MatrixTerm & mt)
-{
-  NewTerm(mt.row, mt.col, mt.value);
-}
-
-bool SparseMatrix::HasTerm(int r, int c, int v) const
-{
-  for (int i = 0; i < terms; ++i)
-    if (smArray[i].row == r && smArray[i].col == c && smArray[i].value == v)
-      return true;
-  return false;
-}
-
-bool SparseMatrix::HasTerm(const MatrixTerm & mt) const
-{
-  return HasTerm(mt.row, mt.col, mt.value);
-}
-
-SparseMatrix SparseMatrix::Transpose()
-{
-  SparseMatrix b(cols, rows);
-
-  if (terms > 0)
-    for (int c = 0; c < cols; ++c)
-      for (int i = 0; i <terms; ++i)
-        if (smArray[i].col == c)
-          b.NewTerm(smArray[i].col, smArray[i].row, smArray[i].value);
-
-  return b;
-}
-
-SparseMatrix SparseMatrix::FastTranspose() const
-{
-  SparseMatrix b(cols, rows);
-
-  boost::scoped_array<int> rowSize(new int[cols]);
-  boost::scoped_array<int> rowStart(new int[cols]);
-
-  b.rows = cols;
-  b.cols = rows;
-
-  if (terms <= 0) return b;
-
-  for (int i = 0; i < cols; ++i) rowSize[i] = 0; // initialize
-  for (int i = 0; i < terms; ++i) ++rowSize[smArray[i].col];
-
-  rowStart[0] = 0;
-  for (int i = 1; i < cols; ++i) rowStart[i] = rowStart[i - 1] + rowSize[i - 1];
-
-  for (int i = 0; i < terms; ++i)
-  {
-    int j = rowStart[smArray[i].col];
-    b.NewTerm(smArray[i].col, smArray[i].row, smArray[i].value); // b.terms added here
-    ++rowStart[smArray[i].col];
-  }
-
-  return b;
-}
-
-int SparseMatrix::StoreSum(int sum, int & lastInResult, int r, int c)
-{
-  if (sum == 0) return 0;
-  
-  if (lastInResult < MAX_TERMS - 1)
-  {
-    NewTerm(r, c, sum, ++lastInResult);
-    return 0;
-  }
+  if (isHead_)
+    right_ = next_ = this;
   else
-    return 1;
+    tri_ = tri;
 }
 
-SparseMatrix & SparseMatrix::operator*=(const SparseMatrix & b)
+Matrix::~Matrix()
 {
-  if (cols != b.rows)
-    throw exception();
-  if ((terms == MAX_TERMS) || (b.terms == MAX_TERMS))
-    throw exception();
-
-  SparseMatrix result;
-  SparseMatrix bXpose = b.FastTranspose();
-  int curRowIndex = 0;
-  int curRowA = smArray[curRowIndex].row;
-  int curRowBegin = curRowIndex;
-  int sum = 0;
-  int lastInResult = -1;
-
-  // set boundary conditions
-  smArray[terms].row = rows;
-  bXpose.smArray[b.terms].row = b.rows;
-  bXpose.smArray[b.terms].col = -1;
-
-  while (curRowIndex < terms) // generate row curRowA of result
+  if (headnode_ == NULL) return;
+  MatrixNodePtr x = headnode_->right_;
+  while (x != headnode_)
   {
-    int curColIndex = 0;
-    int curColB = bXpose.smArray[curColIndex].row;
-
-    while (curColIndex <= b.terms) // multiply row curRowA of A by column curColB of b
+    MatrixNodePtr y = x->right_;
+    while (y != x)
     {
-      if (smArray[curRowIndex].row != curRowA // end of row curRowA of A
-        || bXpose.smArray[curColIndex].row != curColB) // end of column curColB of b
-      {
-        if (result.StoreSum(sum, lastInResult, curRowA, curColB))
-          throw exception();
+      MatrixNodePtr yy = y;
+      y = yy->right_;
+      delete yy;
+    }
+    MatrixNodePtr xx = x;
+    x = x->next_;
+    delete xx;
+  }
+  delete headnode_;
+}
 
-        sum = 0; // reset sum
-        curRowIndex = curRowBegin;
-        while (bXpose.smArray[curColIndex].row == curColB) // go to next column
-          ++curColIndex;
-        curColB = bXpose.smArray[curColIndex].row;
-      }
-      else
-      {
-        int colA = smArray[curRowIndex].col;
-        int colB = bXpose.smArray[curColIndex].col;
-        if (colA < colB)
-          ++curRowIndex;
-        else if (colA > colB)
-          ++curColIndex;
-        else // colA == colB
-          sum += smArray[curRowIndex++].value * bXpose.smArray[curColIndex++].value;
-      }
+std::istream & operator>>(std::istream & is, Matrix & matrix)
+{
+  // read matrix dimensions
+  Triple s;
+  is >> s.row >> s.col >> s.val;
+  matrix.headnode_ = new MatrixNode(s);
+
+  // set up headnode
+  MatrixNodePtr h = matrix.headnode_;
+  int p = (s.row > s.col ? s.row : s.col);
+  if (p <= 0) {
+    h->right_ = h;
+    return is;
+  }
+
+  // initialize head nodes
+  MatrixNodePtr *head = new MatrixNodePtr[p];
+  for (int i = 0; i < p; ++i)
+    head[i] = new MatrixNode(s, true);
+  MatrixNodePtr curRowHead = head[0];
+
+  // read triples
+  int curRow = 0;
+  for (int i = 0; i < s.val; ++i)
+  {
+    Triple t;
+    is >> t.row >> t.col >> t.val;
+
+    // drop empty rows
+    if (t.row > curRow)
+    {
+      curRowHead->right_ = head[curRow];
+      curRow = t.row;
+      curRowHead = head[curRow];
     }
 
-    while (smArray[curRowIndex].row == curRowA) // advanced to next row
-      ++curRowIndex;
-    curRowBegin = curRowIndex;
-    curRowA = smArray[curRowIndex].row;
+    // new node
+    MatrixNodePtr newNode = new MatrixNode(t);
+
+    // link node into row list
+    curRowHead = curRowHead->right_ = newNode;
+
+    // link node into col list
+    MatrixNodePtr curColHead = head[t.col];
+    curColHead->next_ = curColHead->next_->down_ = newNode;
   }
 
-  result.rows = rows; result.cols = b.cols; result.terms = lastInResult + 1;
+  // close last row
+  curRowHead->right_ = head[curRow];
 
-  return *this = result;
+  // close all col lists
+  for (int i = 0; i < s.col; ++i)
+    head[i]->next_->down_ = head[i];
+
+  // link headnodes together
+  for (int i = 0; i < p - 1; ++i)
+    head[i]->next_ = head[i + 1];
+  head[p - 1]->next_ = h;
+  h->right_ = head[0];
+
+  delete[]head;
+
+  return is;
+}
+
+std::ostream & operator<<(std::ostream & os, Matrix & matrix)
+{
+  MatrixNodePtr h = matrix.headnode_;
+  int maxRow = h->tri_.row, maxCol = h->tri_.col;
+
+  int row = 0;
+  MatrixNodePtr x = matrix.headnode_->right_;
+  while (x != matrix.headnode_)
+  {
+    // zero row
+    for (; row < x->tri_.row; ++row) {
+      for (int col = 0; col < maxCol; ++col)
+        os << std::setw(4) << 0;
+      os << '\n';
+    }
+
+    // current row
+    MatrixNodePtr y = x->right_;
+
+    // zero row
+    if (y == x)
+      for (int col = 0; col < maxCol; ++col)
+        os << std::setw(4) << 0;
+    else // none-zero row
+    {
+      int col = 0;
+      while (y != x)
+      {
+        // empty col
+        for (; col < y->tri_.col; ++col)
+          os << std::setw(4) << 0;
+
+        // current col
+        os << std::setw(4) << y->tri_.val;
+
+        // next non-zero col
+        y = y->right_;
+        ++col;
+      }
+
+      // zero col
+      for (; col < maxCol; ++col)
+        os << std::setw(4) << 0;
+    }
+
+    os << '\n';
+
+    // next non-zero row
+    x = x->next_;
+    ++row;
+  }
+
+  return os;
 }

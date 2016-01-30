@@ -17,6 +17,7 @@
   <ItemGroup>
     <Text Include="ReadMe.txt" />
     <Text Include="equivalence.txt" />
+    <Text Include="matrix.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
