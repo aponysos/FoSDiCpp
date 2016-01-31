@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClInclude Include="CH04Test.h" />
     <ClInclude Include="equivalence.h" />
+    <ClInclude Include="GeneralizedList.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Polynomial.h" />
     <ClInclude Include="SparseMatrix.h" />
@@ -96,6 +97,7 @@
     <ClCompile Include="ch04.cpp" />
     <ClCompile Include="CH04Test.cpp" />
     <ClCompile Include="equivalence.cpp" />
+    <ClCompile Include="GeneralizedList.cpp" />
     <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="SparseMatrix.cpp" />
     <ClCompile Include="stdafx.cpp">

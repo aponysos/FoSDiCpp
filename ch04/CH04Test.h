@@ -12,5 +12,6 @@ protected:
   void testPolynomial(void);
   void testEquivalenceClass(void);
   void testSparseMatrix(void);
+  void testGeneralizedList(void);
 
 };

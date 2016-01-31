@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include <fstream>
+#include <sstream>
 #include "CH04Test.h"
 #include "LinkedList.h"
 #include "Polynomial.h"
 #include "equivalence.h"
 #include "SparseMatrix.h"
+#include "GeneralizedList.h"
 
 using namespace std;
 
@@ -16,6 +18,7 @@ CH04Test::CH04Test(void)
   TEST_ADD(CH04Test::testPolynomial);
   TEST_ADD(CH04Test::testEquivalenceClass);
   TEST_ADD(CH04Test::testSparseMatrix);
+  TEST_ADD(CH04Test::testGeneralizedList);
 }
 
 void CH04Test::testHelloWorld(void)
@@ -131,4 +134,12 @@ void CH04Test::testSparseMatrix(void)
   inFile >> m;
   inFile.close();
   cout << endl << m << endl;
+}
+
+void CH04Test::testGeneralizedList(void)
+{
+  GenList gl1;
+  istringstream in("a(ab(ca)b)(c(d))ef(dd)");
+  in >> gl1;
+  cout << endl << gl1 << endl;
 }
