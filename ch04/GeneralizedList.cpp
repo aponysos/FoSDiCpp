@@ -6,6 +6,8 @@ using namespace std;
 
 std::istream & operator>>(std::istream & is, GenList & l)
 {
+  GenList::Dispose(l.first_);
+
   char c = 0;
   Stack<GenListNodePtr> s;
 
@@ -61,21 +63,26 @@ GenList::GenList()
 
 GenList::~GenList()
 {
+  Dispose(first_);
 }
 
 GenList & GenList::operator=(const GenList & l)
 {
+  Dispose(first_);
+
+  first_ = Copy(l.first_);
+
   return *this;
 }
 
 bool GenList::operator==(const GenList & l) const
 {
-  return false;
+  return Equal(first_, l.first_);
 }
 
 int GenList::GetDepth() const
 {
-  return 0;
+  return Depth(first_);
 }
 
 //static 
@@ -95,13 +102,63 @@ void GenList::Dump(std::ostream & os, const GenListNodePtr p)
 }
 
 //static 
-int GenList::equal(GenListNodePtr s, GenListNodePtr t)
+void GenList::Dispose(GenListNodePtr s)
 {
-  return 0;
+  if (s == NULL) return;
+  if (s->tag)
+    Dispose(s->dlink);
+  else
+    Dispose(s->link);
+
+  delete s;
 }
 
 //static 
-int GenList::depth(GenListNodePtr s)
+GenListNodePtr GenList::Copy(const GenListNodePtr s)
 {
-  return 0;
+  if (s == NULL) return NULL;
+
+  GenListNodePtr t = NULL;
+  if (s->tag)
+    t = new GenListNode(Copy(s->dlink), Copy(s->link));
+  else
+    t = new GenListNode(s->data, Copy(s->link));
+
+  return t;
+}
+
+//static 
+bool GenList::Equal(const GenListNodePtr s, const GenListNodePtr t)
+{
+  if (s == t) return true;
+  if (s == NULL || t == NULL) return false;
+
+  if (s->tag == t->tag)
+  {
+    if (s->tag)
+      return Equal(s->dlink, t->dlink) && Equal(s->link, t->link);
+    else
+      return s->data == t->data && Equal(s->link, t->link);
+  }
+
+  return false;
+}
+
+//static 
+int GenList::Depth(const GenListNodePtr s)
+{
+  if (s == NULL) return 0;
+
+  GenListNodePtr p = s;
+  int ret = 0;
+  while (p != NULL)
+  {
+    if (p->tag) {
+      int d = Depth(p->dlink);
+      if (ret < d) ret = d;
+    }
+    p = p->link;
+  }
+
+  return ret + 1;
 }

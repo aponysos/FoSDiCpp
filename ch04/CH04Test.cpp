@@ -142,4 +142,9 @@ void CH04Test::testGeneralizedList(void)
   istringstream in("a(ab(ca)b)(c(d))ef(dd)");
   in >> gl1;
   cout << endl << gl1 << endl;
+  GenList gl2;
+  gl2 = gl1;
+  cout << endl << gl1 << endl;
+  TEST_ASSERT(gl1 == gl2);
+  TEST_ASSERT(gl2.GetDepth() == 3);
 }

@@ -36,8 +36,10 @@ public:
 private:
   // workhorse
   static void Dump(std::ostream & os, const GenListNodePtr p);
-  static int equal(GenListNodePtr s, GenListNodePtr t);
-  static int depth(GenListNodePtr s);
+  static void Dispose(GenListNodePtr s);
+  static GenListNodePtr Copy(const GenListNodePtr s);
+  static bool Equal(const GenListNodePtr s, const GenListNodePtr t);
+  static int Depth(const GenListNodePtr s);
 
 private:
   GenListNodePtr first_;
