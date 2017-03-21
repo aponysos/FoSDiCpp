@@ -101,7 +101,7 @@ std::istream & operator>>(std::istream & is, Matrix & matrix)
 std::ostream & operator<<(std::ostream & os, Matrix & matrix)
 {
   MatrixNodePtr h = matrix.headnode_;
-  int maxRow = h->tri_.row, maxCol = h->tri_.col;
+  int maxCol = h->tri_.col;
 
   int row = 0;
   MatrixNodePtr x = matrix.headnode_->right_;

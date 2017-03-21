@@ -28,10 +28,17 @@ public:
   ListIterator(NodeType * cur) : cur_(cur) {}
   ListIterator<Type> & operator=(const ListIterator<Type> & i) { cur_ = i.cur_; return *this; }
 
-public:
+private:
   Type & Cur() { return cur_->data_; }
   void Next() { cur_ = cur_->rlink_; }
   void Prev() { cur_ = cur_->llink_; }
+
+public:
+  Type & operator*();
+  ListIterator<Type> & operator++();
+  ListIterator<Type> operator++(int);
+  ListIterator<Type> & operator--();
+  ListIterator<Type> operator--(int);
 
 public:
   NodeType * cur_;
@@ -60,8 +67,8 @@ public:
   IteratorType End() const { return IteratorType(head_); }
 
 public:
-  void InsertBefore(IteratorType & i, const Type & data);
-  void InsertAfter(IteratorType & i, const Type & data);
+  void InsertBefore(IteratorType i, const Type & data);
+  void InsertAfter(IteratorType i, const Type & data);
   void InsertBack(const Type & data) { InsertBefore(End(), data); }
   void InsertFront(const Type & data) { InsertAfter(End(), data); }
 
@@ -70,7 +77,7 @@ public:
   Type PeekFront() const { return head_->rlink_->data_; }
 
 public:
-  Type Delete(IteratorType & i);
+  Type Delete(IteratorType i);
   Type DeleteBack() { return Delete(--End()); }
   Type DeleteFront() { return Delete(Begin()); }
 
@@ -80,38 +87,38 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 template <class Type>
-Type & operator*(ListIterator<Type> & i)
+Type & ListIterator<Type>::operator*()
 {
-  return i.Cur();
+  return Cur();
 }
 
 template <class Type>
-ListIterator<Type> & operator++(ListIterator<Type> & i)
+ListIterator<Type> & ListIterator<Type>::operator++()
 {
-  i.Next();
-  return i;
+  Next();
+  return *this;
 }
 
 template <class Type>
-ListIterator<Type> operator++(ListIterator<Type> & i, int)
+ListIterator<Type> ListIterator<Type>::operator++(int)
 {
-  ListIterator<Type> ii = i;
-  i.Next();
+  ListIterator<Type> ii = *this;
+  Next();
   return ii;
 }
 
 template <class Type>
-ListIterator<Type> & operator--(ListIterator<Type> & i)
+ListIterator<Type> & ListIterator<Type>::operator--()
 {
-  i.Prev();
-  return i;
+  Prev();
+  return *this;
 }
 
 template <class Type>
-ListIterator<Type> operator--(ListIterator<Type> & i, int)
+ListIterator<Type> ListIterator<Type>::operator--(int)
 {
-  ListIterator<Type> ii = i;
-  i.Prev();
+  ListIterator<Type> ii = *this;
+  Prev();
   return ii;
 }
 
@@ -195,7 +202,7 @@ bool operator==(const List<Type> & l1, const List<Type> & l2)
 }
 
 template <class Type>
-void List<Type>::InsertAfter(IteratorType & i, const Type & data)
+void List<Type>::InsertAfter(IteratorType i, const Type & data)
 {
   NodeType *newNode = new NodeType(data);
   newNode->rlink_ = i.cur_->rlink_;
@@ -205,7 +212,7 @@ void List<Type>::InsertAfter(IteratorType & i, const Type & data)
 }
 
 template <class Type>
-void List<Type>::InsertBefore(IteratorType & i, const Type & data)
+void List<Type>::InsertBefore(IteratorType i, const Type & data)
 {
   NodeType *newNode = new NodeType(data);
   newNode->llink_ = i.cur_->llink_;
@@ -215,7 +222,7 @@ void List<Type>::InsertBefore(IteratorType & i, const Type & data)
 }
 
 template <class Type>
-Type List<Type>::Delete(IteratorType & i)
+Type List<Type>::Delete(IteratorType i)
 {
   if (IsEmpty()) throw std::exception();
 

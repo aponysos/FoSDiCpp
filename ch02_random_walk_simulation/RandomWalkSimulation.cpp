@@ -8,8 +8,8 @@ RandomWalkSimulator::RandomWalkSimulator(int nn, int mm, int i, int j)
 {
   if (2 <= n && n <= MAX_N && 2 <= m && m <= MAX_M)
     count = new int[n * m];
-  for (int i = 0; i < n * m; ++i)
-    count[i] = 0;
+  for (int ii = 0; ii < n * m; ++ii)
+    count[ii] = 0;
 }
 
 RandomWalkSimulator::~RandomWalkSimulator()

@@ -42,7 +42,7 @@ void CH04Test::testLinkedList(void)
   cout << endl << l2 << endl;
   TEST_ASSERT(l1 == l2);
 
-  ListIterator<int> i = l1.Begin();
+  auto i = l1.Begin();
   TEST_ASSERT(*i == 1);
   ++i;
   TEST_ASSERT(*i++ == 2);

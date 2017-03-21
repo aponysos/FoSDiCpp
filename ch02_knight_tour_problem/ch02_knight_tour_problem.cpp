@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "KnightTourProblem.h"
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain(int /*argc*/, _TCHAR* /*argv*/[])
 {
   ChessBoard cb;
   cb.Start(4, 2);

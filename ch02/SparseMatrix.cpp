@@ -45,8 +45,6 @@ bool SparseMatrix::operator==(const SparseMatrix & sm)
   }
   else 
     return false;
-
-  return true;
 }
 
 void SparseMatrix::NewTerm(int r, int c, int v, int pos)
@@ -117,7 +115,7 @@ SparseMatrix SparseMatrix::FastTranspose() const
   for (int i = 0; i < terms; ++i)
   {
     int j = rowStart[smArray[i].col];
-    b.NewTerm(smArray[i].col, smArray[i].row, smArray[i].value); // b.terms added here
+    b.NewTerm(smArray[i].col, smArray[i].row, smArray[i].value, j); // b.terms added here
     ++rowStart[smArray[i].col];
   }
 

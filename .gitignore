@@ -187,3 +187,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/.vs/FoSDiCpp/v15/Browse.VC.opendb
+/.vs/FoSDiCpp/v15/Solution.VC.db-shm
+/.vs/FoSDiCpp/v15/Solution.VC.db-wal
+/.vs/FoSDiCpp/v15/Browse.VC.db
+/.vs/FoSDiCpp/v15/Solution.VC.db

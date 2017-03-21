@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "RandomWalkSimulation.h"
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain(int /*argc*/, _TCHAR* /*argv*/[])
 {
   RandomWalkSimulator sim(15, 10, 9, 9);
   sim.Start();
