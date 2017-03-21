@@ -10,7 +10,7 @@ struct EquivalenceNode
   int data;
   EquivalenceNode *link;
 
-  EquivalenceNode(int d) : data(d), link(NULL) {}
+  EquivalenceNode(int d) : data(d), link(nullptr) {}
 };
 
 class EquivalenceClass

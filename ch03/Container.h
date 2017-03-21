@@ -6,13 +6,13 @@ template<class KeyType>
 class Deque
 {
 public:
-  Deque(int size = 0, const KeyType * array = NULL)
-    : array_(NULL), capacity_(0), front_(0), back_(0)
+  Deque(int size = 0, const KeyType * array = nullptr)
+    : array_(nullptr), capacity_(0), front_(0), back_(0)
   {
     ExtendCapacity(size);
 
     for (back_ = 0; back_ < size; ++back_)
-      array_[back_] = (array != NULL ? array[back_] : KeyType());
+      array_[back_] = (array != nullptr ? array[back_] : KeyType());
   }
 
   ~Deque() { delete[]array_; }
@@ -131,7 +131,7 @@ template<class KeyType>
 class Stack
 {
 public:
-  Stack(int size = 0, const KeyType * array = NULL)
+  Stack(int size = 0, const KeyType * array = nullptr)
     : deque_(size, array) {}
 
   void Dump(std::ostream & os) const { deque_.Dump(os); }
@@ -153,7 +153,7 @@ template<class KeyType>
 class Queue
 {
 public:
-  Queue(int size = 0, const KeyType * array = NULL)
+  Queue(int size = 0, const KeyType * array = nullptr)
     : deque_(size, array) {}
 
   void Dump(std::ostream & os) const { deque_.Dump(os); }

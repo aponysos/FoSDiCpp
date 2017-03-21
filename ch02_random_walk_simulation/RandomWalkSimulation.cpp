@@ -4,7 +4,7 @@
 using namespace std;
 
 RandomWalkSimulator::RandomWalkSimulator(int nn, int mm, int i, int j)
-  : n(nn), m(mm), ibug(i), jbug(j), count(NULL), moves(0)
+  : n(nn), m(mm), ibug(i), jbug(j), count(nullptr), moves(0)
 {
   if (2 <= n && n <= MAX_N && 2 <= m && m <= MAX_M)
     count = new int[n * m];
@@ -45,7 +45,7 @@ void RandomWalkSimulator::PrintCountArray()
 
 void RandomWalkSimulator::Start()
 {
-  srand((unsigned int)time(NULL));
+  srand((unsigned int)time(nullptr));
 
   ++Count(ibug, jbug);
 

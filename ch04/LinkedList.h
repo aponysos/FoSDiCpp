@@ -11,7 +11,7 @@ class ListNode
   friend struct ListIterator<Type>;
 
 public:
-  ListNode(const Type & data) : data_(data), llink_(NULL), rlink_(NULL) {}
+  ListNode(const Type & data) : data_(data), llink_(nullptr), rlink_(nullptr) {}
 
 private:
   Type data_;
@@ -67,8 +67,8 @@ public:
   IteratorType End() const { return IteratorType(head_); }
 
 public:
-  void InsertBefore(IteratorType i, const Type & data);
-  void InsertAfter(IteratorType i, const Type & data);
+  void InsertBefore(const IteratorType & i, const Type & data);
+  void InsertAfter(const IteratorType & i, const Type & data);
   void InsertBack(const Type & data) { InsertBefore(End(), data); }
   void InsertFront(const Type & data) { InsertAfter(End(), data); }
 
@@ -77,7 +77,7 @@ public:
   Type PeekFront() const { return head_->rlink_->data_; }
 
 public:
-  Type Delete(IteratorType i);
+  Type Delete(const IteratorType & i);
   Type DeleteBack() { return Delete(--End()); }
   Type DeleteFront() { return Delete(Begin()); }
 
@@ -137,7 +137,7 @@ bool operator!=(const ListIterator<Type> & i1, const ListIterator<Type> & i2)
 ///////////////////////////////////////////////////////////////////////////////////////////////
 template <class Type>
 List<Type>::List()
-  : head_(NULL)
+  : head_(nullptr)
 {
   head_ = new NodeType(Type());
   head_->llink_ = head_->rlink_ = head_;
@@ -147,7 +147,7 @@ template <class Type>
 List<Type>::~List()
 {
   NodeType * cur = head_;
-  NodeType * next = NULL;
+  NodeType * next = nullptr;
   while (next != head_)
   {
     next = cur->rlink_;
@@ -202,17 +202,7 @@ bool operator==(const List<Type> & l1, const List<Type> & l2)
 }
 
 template <class Type>
-void List<Type>::InsertAfter(IteratorType i, const Type & data)
-{
-  NodeType *newNode = new NodeType(data);
-  newNode->rlink_ = i.cur_->rlink_;
-  newNode->llink_ = i.cur_;
-  i.cur_->rlink_->llink_ = newNode;
-  i.cur_->rlink_ = newNode;
-}
-
-template <class Type>
-void List<Type>::InsertBefore(IteratorType i, const Type & data)
+void List<Type>::InsertBefore(const IteratorType & i, const Type & data)
 {
   NodeType *newNode = new NodeType(data);
   newNode->llink_ = i.cur_->llink_;
@@ -222,11 +212,22 @@ void List<Type>::InsertBefore(IteratorType i, const Type & data)
 }
 
 template <class Type>
-Type List<Type>::Delete(IteratorType i)
+void List<Type>::InsertAfter(const IteratorType & i, const Type & data)
+{
+  NodeType *newNode = new NodeType(data);
+  newNode->rlink_ = i.cur_->rlink_;
+  newNode->llink_ = i.cur_;
+  i.cur_->rlink_->llink_ = newNode;
+  i.cur_->rlink_ = newNode;
+}
+
+template <class Type>
+Type List<Type>::Delete(const IteratorType & i)
 {
   if (IsEmpty()) throw std::exception();
 
-  NodeType & cur = *(i++.cur_);
+  IteratorType ii = i;
+  NodeType & cur = *(ii++.cur_);
   cur.llink_->rlink_ = cur.rlink_;
   cur.rlink_->llink_ = cur.llink_;
 

@@ -3,7 +3,7 @@
 #include "LinkedList.h"
 
 EquivalenceClass::EquivalenceClass()
-  : n_(0), seq_(NULL), out_(NULL)
+  : n_(0), seq_(nullptr), out_(nullptr)
 {
 }
 
@@ -17,8 +17,8 @@ EquivalenceClass::~EquivalenceClass()
 
 void EquivalenceClass::DeleteList(EquivalenceNodePtr node)
 {
-  EquivalenceNodePtr next = NULL;
-  while (node != NULL)
+  EquivalenceNodePtr next = nullptr;
+  while (node != nullptr)
   {
     next = node->link;
     delete node;
@@ -34,7 +34,7 @@ void EquivalenceClass::Input(std::istream & is)
   seq_ = new EquivalenceNodePtr[n_];
   out_ = new bool[n_];
   for (int k = 0; k < n_; ++k) {
-    seq_[k] = NULL;
+    seq_[k] = nullptr;
     out_[k] = false;
   }
 
@@ -70,7 +70,7 @@ void EquivalenceClass::Output(std::ostream & os)
       os << " " << j;
 
       EquivalenceNodePtr x = seq_[j];
-      while (x != NULL)
+      while (x != nullptr)
       {
         int k = x->data;
         if (!out_[k]) q.Add(k);

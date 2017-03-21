@@ -3,10 +3,10 @@
 
 struct GenListNode
 {
-  GenListNode(char d, GenListNode * l = NULL)
+  GenListNode(char d, GenListNode * l = nullptr)
     : link(l), data(d), tag(false) {}
 
-  GenListNode(GenListNode * dl, GenListNode * l = NULL)
+  GenListNode(GenListNode * dl, GenListNode * l = nullptr)
     : link(l), dlink(dl), tag(true) {}
 
   bool tag; // is data link ?

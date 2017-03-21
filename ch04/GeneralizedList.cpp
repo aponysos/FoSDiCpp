@@ -12,7 +12,7 @@ std::istream & operator>>(std::istream & is, GenList & l)
   Stack<GenListNodePtr> s;
 
   // add fake node
-  GenListNodePtr fakeNode = new GenListNode((GenListNodePtr)NULL, (GenListNodePtr)NULL);
+  GenListNodePtr fakeNode = new GenListNode((GenListNodePtr)nullptr, (GenListNodePtr)nullptr);
   GenListNodePtr curNode = fakeNode;
   s.Push(curNode);
 
@@ -26,7 +26,7 @@ std::istream & operator>>(std::istream & is, GenList & l)
     default:
       GenListNodePtr newNode = (
         c == '('
-        ? new GenListNode((GenListNodePtr)NULL, (GenListNodePtr)NULL) // list node
+        ? new GenListNode((GenListNodePtr)nullptr, (GenListNodePtr)nullptr) // list node
         : new GenListNode(c) // atom node
         );
 
@@ -57,7 +57,7 @@ std::ostream & operator<<(std::ostream & os, const GenList & l)
 
 
 GenList::GenList()
-  : first_(NULL)
+  : first_(nullptr)
 {
 }
 
@@ -88,7 +88,7 @@ int GenList::GetDepth() const
 //static 
 void GenList::Dump(std::ostream & os, const GenListNodePtr p)
 {
-  if (p == NULL) return;
+  if (p == nullptr) return;
   if (p->tag) {
     os << '(';
     Dump(os, p->dlink);
@@ -104,7 +104,7 @@ void GenList::Dump(std::ostream & os, const GenListNodePtr p)
 //static 
 void GenList::Dispose(GenListNodePtr s)
 {
-  if (s == NULL) return;
+  if (s == nullptr) return;
   if (s->tag)
     Dispose(s->dlink);
   else
@@ -116,9 +116,9 @@ void GenList::Dispose(GenListNodePtr s)
 //static 
 GenListNodePtr GenList::Copy(const GenListNodePtr s)
 {
-  if (s == NULL) return NULL;
+  if (s == nullptr) return nullptr;
 
-  GenListNodePtr t = NULL;
+  GenListNodePtr t = nullptr;
   if (s->tag)
     t = new GenListNode(Copy(s->dlink), Copy(s->link));
   else
@@ -131,7 +131,7 @@ GenListNodePtr GenList::Copy(const GenListNodePtr s)
 bool GenList::Equal(const GenListNodePtr s, const GenListNodePtr t)
 {
   if (s == t) return true;
-  if (s == NULL || t == NULL) return false;
+  if (s == nullptr || t == nullptr) return false;
 
   if (s->tag == t->tag)
   {
@@ -147,11 +147,11 @@ bool GenList::Equal(const GenListNodePtr s, const GenListNodePtr t)
 //static 
 int GenList::Depth(const GenListNodePtr s)
 {
-  if (s == NULL) return 0;
+  if (s == nullptr) return 0;
 
   GenListNodePtr p = s;
   int ret = 0;
-  while (p != NULL)
+  while (p != nullptr)
   {
     if (p->tag) {
       int d = Depth(p->dlink);

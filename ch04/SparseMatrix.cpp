@@ -15,7 +15,7 @@ MatrixNode::MatrixNode(const Triple &tri, bool isHead)
 
 Matrix::~Matrix()
 {
-  if (headnode_ == NULL) return;
+  if (headnode_ == nullptr) return;
   MatrixNodePtr x = headnode_->right_;
   while (x != headnode_)
   {

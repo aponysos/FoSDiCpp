@@ -18,7 +18,7 @@ int Maze::MOVE_VECTOR[8][2] =
 };
 
 Maze::Maze()
-  : maze_(NULL), mark_(NULL), m_(0), p_(0)
+  : maze_(nullptr), mark_(nullptr), m_(0), p_(0)
 {
 }
 

@@ -7,7 +7,7 @@ using namespace std;
 String::String(const char *init, int l)
   : str(""), len(0)
 {
-  if (init == NULL || l < -1) return;
+  if (init == nullptr || l < -1) return;
 
   len = l < 0 ? strlen(init) : l;
 
