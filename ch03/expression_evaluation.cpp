@@ -11,14 +11,14 @@ Expression::Expression(const std::string & infix)
 
 std::string Expression::Infix2Postfix(void)
 {
-  postfix_.resize(infix_.length());
-
-  Stack<char> stack(8);
+  postfix_.clear();
+  Stack<char> stack;
+  stack.Push('#');
   for (auto i = infix_.begin(); i < infix_.end(); ++i)
   {
     char c = *i;
     if (IsOperand(c))
-      stack.Push(c);
+      postfix_.push_back(c);
     else if (c == ')')
       for (char cc = stack.Pop(); cc != '('; cc = stack.Pop())
         postfix_.push_back(cc);
@@ -34,17 +34,18 @@ std::string Expression::Infix2Postfix(void)
   while (!stack.IsEmpty())
     postfix_.push_back(stack.Pop());
 
+  postfix_.erase(postfix_.size() - 1); // remove '#'
   return postfix_;
 }
 
 int Expression::Evaluate(void)
 {
-  Stack<int> stack(8);
+  Stack<int> stack;
   for (auto i = postfix_.begin(); i < postfix_.end(); ++i)
   {
     char c = *i;
     if (IsOperand(c))
-      stack.Push(c + '0');
+      stack.Push(c - '0');
     else
     {
       int op2 = stack.Pop();
@@ -94,6 +95,9 @@ int Expression::ISP(char c)
     break;
   case '(':
     ret = 8;
+    break;
+  case '#':
+    ret = 10;
     break;
   default:
     throw exception();
