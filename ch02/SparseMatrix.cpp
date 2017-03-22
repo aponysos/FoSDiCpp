@@ -52,6 +52,7 @@ void SparseMatrix::NewTerm(int r, int c, int v, int pos)
   smArray[pos].row = r;
   smArray[pos].col = c;
   smArray[pos].value = v;
+  ++terms;
 }
 
 void SparseMatrix::NewTerm(int r, int c, int v)
@@ -61,7 +62,7 @@ void SparseMatrix::NewTerm(int r, int c, int v)
     return;
   }
 
-  NewTerm(r, c, v, terms++);
+  NewTerm(r, c, v, terms + 1);
 }
 void SparseMatrix::NewTerm(const MatrixTerm & mt)
 {
