@@ -28,9 +28,6 @@
     <ClInclude Include="Container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CH03Test.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mazing_problem.h">
       <Filter>Header Files</Filter>
     </ClInclude>

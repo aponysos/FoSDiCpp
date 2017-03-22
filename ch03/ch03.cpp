@@ -2,12 +2,9 @@
 //
 
 #include "stdafx.h"
-#include "CH03Test.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-  CH03Test tests;
-  Test::TextOutput output(Test::TextOutput::Verbose);
-
-  return tests.run(output);
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
