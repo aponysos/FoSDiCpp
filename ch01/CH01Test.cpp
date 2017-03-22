@@ -27,12 +27,15 @@ TEST(ch01, testBinarySearch)
     int b = BinarySearch(a, i, 0, 9);
     EXPECT_EQ(b, i);
   }
+
+  EXPECT_EQ(BinarySearch(a, 10, 10), -1);
+  EXPECT_EQ(BinarySearch(a, 10, 0, 9), -1);
 }
 
 TEST(ch01, testPerm)
 {
   char a[4] = { '1', '2', '3', };
-  cout << endl;
+  cout << '\n';
   Perm(a, 0, 3);
 }
 
@@ -45,7 +48,7 @@ TEST(ch01, testFibonacci)
 
 TEST(ch01, testMagic)
 {
-  cout << endl;
+  cout << '\n';
   Magic(0);
   Magic(1);
   Magic(3);

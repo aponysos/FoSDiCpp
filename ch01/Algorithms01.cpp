@@ -7,12 +7,10 @@ void SelectionSort(int *a, const int n)
 {
   for (int i = 0; i < n; i++)
   {
+    // find smallest integer(a[j]) in a[i] to a[n-1]
     int j = i;
-
-    // find smallest integer in a[i] to a[n-1]
     for (int k = j + 1; k < n; ++k)
       if (a[k] < a[j]) j = k;
-
     // interchage
     swap(a[i], a[j]);
   }
@@ -58,7 +56,7 @@ void Perm(char *a, const int k, const int n)
   { // output permutation
     for (int i = 0; i < n; ++i)
       cout << a[i] << " ";
-    cout << endl;
+    cout << '\n';
   }
   else // a[k], ..., a[n-1] has more than one permutation. Generate these recursively.
   {
@@ -136,7 +134,7 @@ void Magic(int n)
   // output the magic square
   for (i = 0; i < n; ++i) {
     for (j = 0; j < n; ++j)
-      cout << square[i][j] << " ";
-    cout << endl;
+      cout << setw(4) << square[i][j];
+    cout << '\n';
   }
 }
