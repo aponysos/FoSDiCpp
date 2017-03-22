@@ -101,9 +101,6 @@ SparseMatrix SparseMatrix::FastTranspose() const
   boost::scoped_array<int> rowSize(new int[cols]);
   boost::scoped_array<int> rowStart(new int[cols]);
 
-  b.rows = cols;
-  b.cols = rows;
-
   if (terms <= 0) return b;
 
   for (int i = 0; i < cols; ++i) rowSize[i] = 0; // initialize

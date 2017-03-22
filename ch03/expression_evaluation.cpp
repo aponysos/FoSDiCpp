@@ -14,11 +14,11 @@ std::string Expression::Infix2Postfix(void)
   postfix_.resize(infix_.length());
 
   Stack<char> stack(8);
-  for (auto i = postfix_.begin(); i < postfix_.end(); ++i)
+  for (auto i = infix_.begin(); i < infix_.end(); ++i)
   {
     char c = *i;
     if (IsOperand(c))
-      postfix_.push_back(c);
+      stack.Push(c);
     else if (c == ')')
       for (char cc = stack.Pop(); cc != '('; cc = stack.Pop())
         postfix_.push_back(cc);
