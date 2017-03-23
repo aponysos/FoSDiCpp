@@ -20,6 +20,8 @@ TEST(ch02, testPolynomial)
   a.NewTerm(4, 0);
   EXPECT_TRUE(a.Eval(1) == 9);
   EXPECT_TRUE(a.Eval(2) == 20);
+  EXPECT_TRUE(a.HornerEval(1) == 9);
+  EXPECT_TRUE(a.HornerEval(2) == 20);
 
   Polynomial b;
   b.NewTerm(1, 4);
@@ -27,16 +29,22 @@ TEST(ch02, testPolynomial)
   b.NewTerm(3, 2);
   EXPECT_TRUE(b.Eval(1) == 14);
   EXPECT_TRUE(b.Eval(2) == 108);
+  EXPECT_TRUE(b.HornerEval(1) == 14);
+  EXPECT_TRUE(b.HornerEval(2) == 108);
 
   Polynomial c;
   c = a + b;
   EXPECT_TRUE(c.Eval(1) == 23);
   EXPECT_TRUE(c.Eval(2) == 128);
+  EXPECT_TRUE(c.HornerEval(1) == 23);
+  EXPECT_TRUE(c.HornerEval(2) == 128);
 
   Polynomial d;
   d = b + a;
   EXPECT_TRUE(d.Eval(1) == 23);
   EXPECT_TRUE(d.Eval(2) == 128);
+  EXPECT_TRUE(d.HornerEval(1) == 23);
+  EXPECT_TRUE(d.HornerEval(2) == 128);
 }
 
 TEST(ch02, testSparseMatrix)

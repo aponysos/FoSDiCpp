@@ -62,7 +62,7 @@ void SparseMatrix::NewTerm(int r, int c, int v)
     return;
   }
 
-  NewTerm(r, c, v, terms + 1);
+  NewTerm(r, c, v, terms);
 }
 void SparseMatrix::NewTerm(const MatrixTerm & mt)
 {

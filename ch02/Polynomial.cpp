@@ -41,6 +41,14 @@ int Polynomial::Eval(int x)
   return ret;
 }
 
+int Polynomial::HornerEval(int x)
+{
+  int ret = 0;
+  for (int i = start; i <= finish; ++i)
+    ret += termArray[i].coef * static_cast<int>(pow(x, termArray[i].exp));
+  return ret;
+}
+
 Polynomial & Polynomial::operator+=(const Polynomial & poly)
 {
   int s1 = start, f1 = finish, s2 = poly.start, f2 = poly.finish;

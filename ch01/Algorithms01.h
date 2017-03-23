@@ -32,3 +32,39 @@ int Fibonacci(int n);
 // Program 1.22: Magic square p49
 // Create a magic square of size n, n is odd.
 void Magic(int n);
+
+// p28 EX.1 see ch02 Polynomial
+
+// p28 EX.2
+// Given n Boolean variables, print all possible combinations of truth values they can assume
+
+// p28 EX.3
+// print out the integer values of x, y and z in non-decreasing order
+
+// p29 EX.7 [factorial function]
+// compute n!, recursive & iterative
+
+// p29 EX.8
+// compute fibonacci number fi, recursive & iterative
+
+// p29 EX.9 EX.10 [binomial coefficient]
+// compute binomial coefficient (n, m), recursive & iterative
+
+// p29 EX.11 [Ackermann's function]
+// A(m, n) = n + 1, if m = 0
+// A(m, n) = A(m - 1, 1), if n = 0
+// A(m, n) = A(m - 1, A(m, n - 1)), otherwise
+// recursive & iterative
+
+// p29 EX.12 [pigeonhole principle]
+// find the values a & b, for which the range values are equal, f(a) = f(b)
+// the inputs are 1, 2, 3, ... , n
+
+// p29 EX.13
+// Given a positive integer n, determine if n is the sum of all of its divisors
+
+// p29 EX.15 [powerset]
+// recursive function to compute powerset(S)
+
+// p29 EX.16 [Towers of Hanoi]
+

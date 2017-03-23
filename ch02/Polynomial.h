@@ -24,6 +24,9 @@ public:
 
   // Evaluate the polynomial at x and return the result
   int Eval(int x);
+  // P27 CH01 EX.1
+  // Horner'rule : minimum number of multiplication
+  int HornerEval(int x);
 
   // addition
   Polynomial & operator+=(const Polynomial & poly);
