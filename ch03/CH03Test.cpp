@@ -1,9 +1,16 @@
 #include "stdafx.h"
+#include "gtest/gtest.h"
 #include "Container.h"
 #include "mazing_problem.h"
 #include "expression_evaluation.h"
 
 using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
 
 TEST(ch03, testDeque)
 {

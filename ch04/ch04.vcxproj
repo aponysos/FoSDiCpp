@@ -94,7 +94,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ch04.cpp" />
     <ClCompile Include="CH04Test.cpp" />
     <ClCompile Include="equivalence.cpp" />
     <ClCompile Include="GeneralizedList.cpp" />

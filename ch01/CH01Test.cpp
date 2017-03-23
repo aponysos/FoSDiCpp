@@ -1,7 +1,14 @@
 #include "stdafx.h"
+#include "gtest/gtest.h"
 #include "Algorithms01.h"
 
 using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
 
 TEST(ch01, testSelectionSort)
 {

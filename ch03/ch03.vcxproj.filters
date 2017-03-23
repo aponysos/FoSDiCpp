@@ -39,9 +39,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ch03.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CH03Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

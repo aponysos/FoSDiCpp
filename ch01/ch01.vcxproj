@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms01.cpp" />
-    <ClCompile Include="ch01.cpp" />
     <ClCompile Include="CH01Test.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "SparseMatrix.h"
 #include <iomanip>
+#include "SparseMatrix.h"
 
 using namespace std;
 

@@ -11,5 +11,4 @@
 #include <tchar.h>
 
 // TODO: reference additional headers your program requires here
-#pragma warning(disable:4100)
-#include  "gtest/gtest.h"
+#include <iostream>

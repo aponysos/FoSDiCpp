@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <fstream>
 #include <sstream>
+#include "gtest/gtest.h"
 #include "LinkedList.h"
 #include "Polynomial.h"
 #include "equivalence.h"
@@ -8,6 +9,12 @@
 #include "GeneralizedList.h"
 
 using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
 
 TEST(ch04, testLinkedList)
 {

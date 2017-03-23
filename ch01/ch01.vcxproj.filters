@@ -32,9 +32,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ch01.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CH01Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
