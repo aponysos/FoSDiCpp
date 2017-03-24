@@ -64,3 +64,9 @@ TEST(ch01, testMagic)
   Magic(7);
   Magic(52);
 }
+
+TEST(ch01_ex, testPrintAllAssignments)
+{
+  PrintAllAssignments(2);
+  PrintAllAssignments(4);
+}

@@ -35,8 +35,10 @@ void Magic(int n);
 
 // p28 EX.1 see ch02 Polynomial
 
-// p28 EX.2
+// p28 EX.2 [print all assignments]
 // Given n Boolean variables, print all possible combinations of truth values they can assume
+void PrintAllAssignments(int n);
+void PrintAllAssignments(bool *arr, int m, int n);
 
 // p28 EX.3
 // print out the integer values of x, y and z in non-decreasing order

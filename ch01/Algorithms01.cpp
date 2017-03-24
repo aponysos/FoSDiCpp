@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Algorithms01.h"
+#include "boost\smart_ptr\scoped_array.hpp"
 
 using namespace std;
 
@@ -136,5 +137,27 @@ void Magic(int n)
     for (j = 0; j < n; ++j)
       cout << setw(4) << square[i][j];
     cout << '\n';
+  }
+}
+
+void PrintAllAssignments(int n)
+{
+  boost::scoped_array<bool> arr(new bool[n]);
+  for (int i = 0; i < n; ++i)
+    arr[i] = false;
+  PrintAllAssignments(arr.get(), 0, n);
+}
+
+void PrintAllAssignments(bool *arr, int m, int n)
+{
+  if (m == n - 1) {
+    for (int i = 0; i < n; ++i)
+      cout << boolalpha << arr[i] << " ";
+    cout << '\n';
+  }
+  else {
+    PrintAllAssignments(arr, m + 1, n);
+    arr[m] ^= true; // xor change arr[m]
+    PrintAllAssignments(arr, m + 1, n);
   }
 }
