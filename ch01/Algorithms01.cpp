@@ -161,3 +161,13 @@ void PrintAllAssignments(bool *arr, int m, int n)
     PrintAllAssignments(arr, m + 1, n);
   }
 }
+
+void SortTriple(int *tr)
+{
+  if (tr[0] > tr[1])
+    swap(tr[0], tr[1]);
+  if (tr[1] > tr[2])
+    swap(tr[1], tr[2]);
+  if (tr[0] > tr[1])
+    swap(tr[0], tr[1]);
+}

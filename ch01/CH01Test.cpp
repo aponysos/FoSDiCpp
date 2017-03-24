@@ -70,3 +70,11 @@ TEST(ch01_ex, testPrintAllAssignments)
   PrintAllAssignments(2);
   PrintAllAssignments(4);
 }
+
+TEST(ch01_ex, testSortTriple)
+{
+  int tr[] = { 3, 2, 1 };
+  SortTriple(tr);
+  EXPECT_LE(tr[0], tr[1]);
+  EXPECT_LE(tr[1], tr[2]);
+}

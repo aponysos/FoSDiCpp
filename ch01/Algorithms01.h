@@ -40,13 +40,14 @@ void Magic(int n);
 void PrintAllAssignments(int n);
 void PrintAllAssignments(bool *arr, int m, int n);
 
-// p28 EX.3
+// p28 EX.3 [sort triple integer]
 // print out the integer values of x, y and z in non-decreasing order
+void SortTriple(int *tr);
 
 // p29 EX.7 [factorial function]
 // compute n!, recursive & iterative
 
-// p29 EX.8
+// p29 EX.8 [fibonacci number]
 // compute fibonacci number fi, recursive & iterative
 
 // p29 EX.9 EX.10 [binomial coefficient]
