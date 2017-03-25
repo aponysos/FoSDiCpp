@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Algorithms01.h"
 #include "boost\smart_ptr\scoped_array.hpp"
+#include <vector>
 
 using namespace std;
 
@@ -243,4 +244,32 @@ int AckermannR(int m, int n)
     return AckermannR(m - 1, 1);
   else
     return AckermannR(m - 1, AckermannR(m, n - 1));
+}
+
+bool IsSumOfDivisors(int n)
+{
+  vector<int> divisors;
+  for (int i = 1; i <= n / 2; ++i)
+    if (n % i == 0)
+      divisors.push_back(i);
+  int sum = 0;
+  for (auto d : divisors)
+    sum += d;
+  return sum == n;
+}
+
+int Hanoi(int n, char from, char pass, char to)
+{
+  if (n == 1) {
+    cout << from << " -> " << to << '\n';
+    return 1;
+  }
+  else {
+    int nstep = 0;
+    nstep += Hanoi(n - 1, from, to, pass);
+    cout << from << " -> " << to << '\n';
+    ++nstep;
+    nstep += Hanoi(n - 1, pass, from, to);
+    return nstep;
+  }
 }

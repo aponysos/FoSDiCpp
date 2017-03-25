@@ -73,9 +73,12 @@ int AckermannR(int m, int n);
 
 // p29 EX.13
 // Given a positive integer n, determine if n is the sum of all of its divisors
+bool IsSumOfDivisors(int n);
 
 // p29 EX.15 [powerset]
 // recursive function to compute powerset(S)
 
 // p29 EX.16 [Towers of Hanoi]
+// return # of steps
+int Hanoi(int n, char from = 'A', char pass = 'B', char to = 'C');
 

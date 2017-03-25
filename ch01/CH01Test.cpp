@@ -113,3 +113,25 @@ TEST(ch01_ex, testAckermann)
     EXPECT_EQ(AckermannR(am[i], an[i]), aa[i]);
   }
 }
+TEST(ch01_ex, testIsSumOfDivisors)
+{
+  EXPECT_EQ(IsSumOfDivisors(1), false);
+  EXPECT_EQ(IsSumOfDivisors(2), false);
+  EXPECT_EQ(IsSumOfDivisors(4), false);
+  EXPECT_EQ(IsSumOfDivisors(6), true);
+  EXPECT_EQ(IsSumOfDivisors(7), false);
+  EXPECT_EQ(IsSumOfDivisors(18), false);
+  EXPECT_EQ(IsSumOfDivisors(20), false);
+}
+
+TEST(ch01_ex, testHanoi)
+{
+  cout << "Hanoi(1)" << '\n';
+  Hanoi(1);
+  cout << "Hanoi(2)" << '\n';
+  Hanoi(2);
+  cout << "Hanoi(3)" << '\n';
+  Hanoi(3);
+  cout << "Hanoi(4)" << '\n';
+  Hanoi(4);
+}
