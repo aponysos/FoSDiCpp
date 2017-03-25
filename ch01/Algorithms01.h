@@ -64,6 +64,8 @@ int BinomialCoefficientR(int n, int m);
 // A(m, n) = A(m - 1, 1), if n = 0
 // A(m, n) = A(m - 1, A(m, n - 1)), otherwise
 // recursive & iterative
+int Ackermann(int m, int n);
+int AckermannR(int m, int n);
 
 // p29 EX.12 [pigeonhole principle]
 // find the values a & b, for which the range values are equal, f(a) = f(b)

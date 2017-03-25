@@ -94,11 +94,22 @@ TEST(ch01_ex, testFactorial)
 
 TEST(ch01_ex, testBinomialCoefficient)
 {
-  int an[] = {5, 5, 5, 5};
-  int am[] = {0, 1, 5, 3};
-  int abc[] = {1, 5, 1, 10};
+  int an[] = { 5, 5, 5, 5 };
+  int am[] = { 0, 1, 5, 3 };
+  int abc[] = { 1, 5, 1, 10 };
   for (int i = 0; i < ARRAY_LENGTH(abc); ++i) {
     EXPECT_EQ(BinomialCoefficient(an[i], am[i]), abc[i]);
     EXPECT_EQ(BinomialCoefficientR(an[i], am[i]), abc[i]);
+  }
+}
+
+TEST(ch01_ex, testAckermann)
+{
+  int am[] = { 0, 1, 2, 3, 4 };
+  int an[] = { 5, 3, 4, 2, 0 };
+  int aa[] = { 6, 5, 11, 29, 13 };
+  for (int i = 0; i < ARRAY_LENGTH(aa); ++i) {
+    EXPECT_EQ(Ackermann(am[i], an[i]), aa[i]);
+    EXPECT_EQ(AckermannR(am[i], an[i]), aa[i]);
   }
 }

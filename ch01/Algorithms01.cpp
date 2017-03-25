@@ -210,3 +210,37 @@ int BinomialCoefficientR(int n, int m)
   else
     return BinomialCoefficientR(n - 1, m - 1) + BinomialCoefficientR(n - 1, m);
 }
+
+int Ackermann(int m, int n)
+{
+  switch (m)
+  {
+  case 0:
+    return n + 1;
+  case 1:
+    return n + 2;
+  case 2:
+    return n * 2 + 3;
+  case 3:
+    return (1 << (n + 3)) - 3;
+  case 4:
+    {
+      int ret = 2;
+      for (int i = 0; i < n + 2; ++i)
+        ret = (1 << ret);
+      return ret - 3;
+    }
+  default:
+    throw exception();
+  }
+}
+
+int AckermannR(int m, int n)
+{
+  if (m == 0)
+    return n + 1;
+  else if (n == 0)
+    return AckermannR(m - 1, 1);
+  else
+    return AckermannR(m - 1, AckermannR(m, n - 1));
+}
