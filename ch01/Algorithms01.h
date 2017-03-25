@@ -77,6 +77,9 @@ bool IsSumOfDivisors(int n);
 
 // p29 EX.15 [powerset]
 // recursive function to compute powerset(S)
+// elements of S is represented in string 's' of size n, each by one character
+void Powerset(const char *s, int n);
+void Powerset(const char *s, bool * b, int m, int n); // b is assignment array
 
 // p29 EX.16 [Towers of Hanoi]
 // return # of steps

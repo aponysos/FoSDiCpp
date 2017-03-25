@@ -151,7 +151,7 @@ void PrintAllAssignments(int n)
 
 void PrintAllAssignments(bool *arr, int m, int n)
 {
-  if (m == n - 1) {
+  if (m == n) {
     for (int i = 0; i < n; ++i)
       cout << boolalpha << arr[i] << " ";
     cout << '\n';
@@ -256,6 +256,34 @@ bool IsSumOfDivisors(int n)
   for (auto d : divisors)
     sum += d;
   return sum == n;
+}
+
+void Powerset(const char * s, int n)
+{
+  boost::scoped_array<bool> b(new bool[n]);
+  for (int i = 0; i < n; ++i)
+    b[i] = false;
+  Powerset(s, b.get(), 0, n);
+}
+
+void Powerset(const char * s, bool * b, int m, int n)
+{
+  if (m == n) {
+    int isEmpty = true;
+    for (int i = 0; i < n; ++i)
+      if (b[i]) {
+        cout << s[i] << " ";
+        isEmpty = false;
+      }
+    if (isEmpty)
+      cout << '@';
+    cout << '\n';
+  }
+  else {
+    Powerset(s, b, m + 1, n);
+    b[m] ^= true; // xor change b[m]
+    Powerset(s, b, m + 1, n);
+  }
 }
 
 int Hanoi(int n, char from, char pass, char to)

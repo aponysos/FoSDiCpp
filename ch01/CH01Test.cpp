@@ -124,6 +124,16 @@ TEST(ch01_ex, testIsSumOfDivisors)
   EXPECT_EQ(IsSumOfDivisors(20), false);
 }
 
+TEST(ch01_ex, testPowerset)
+{
+  Powerset("", 0);
+  Powerset("a", 1);
+  Powerset("ab", 2);
+  Powerset("abc", 3);
+  Powerset("abcd", 4);
+  Powerset("abcde", 5);
+}
+
 TEST(ch01_ex, testHanoi)
 {
   cout << "Hanoi(1)" << '\n';
