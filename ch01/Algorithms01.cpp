@@ -171,3 +171,27 @@ void SortTriple(int *tr)
   if (tr[0] > tr[1])
     swap(tr[0], tr[1]);
 }
+
+int Factorial(int n)
+{
+  int ret = 1;
+  for (int i = 1; i <= n; ++i)
+    ret *= i;
+  return ret;
+}
+
+int FactorialR(int n)
+{
+  if (n <= 1)
+    return 1;
+  else
+    return FactorialR(n - 1) * n;
+}
+
+int FibonacciR(int n)
+{
+  if (n <= 1)
+    return n;
+  else
+    return FibonacciR(n - 1) + FibonacciR(n - 2);
+}

@@ -78,3 +78,21 @@ TEST(ch01_ex, testSortTriple)
   EXPECT_LE(tr[0], tr[1]);
   EXPECT_LE(tr[1], tr[2]);
 }
+
+#define ARRAY_LENGTH(__X__) (sizeof(__X__) / sizeof(*(__X__)))
+
+TEST(ch01_ex, testFactorial)
+{
+  int fact[11] = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800 };
+  for (int i = 0; i < ARRAY_LENGTH(fact); ++i) {
+    EXPECT_EQ(Factorial(i), fact[i]);
+    EXPECT_EQ(FactorialR(i), fact[i]);
+  }
+}
+
+TEST(ch01_ex, testFibonacciR)
+{
+  int fibo[11] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 };
+  for (int i = 0; i < ARRAY_LENGTH(fibo); ++i)
+    EXPECT_EQ(FibonacciR(i), fibo[i]);
+}
