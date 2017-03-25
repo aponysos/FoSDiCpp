@@ -56,6 +56,8 @@ int FibonacciR(int n); // recursive
 
 // p29 EX.9 EX.10 [binomial coefficient]
 // compute binomial coefficient (n, m), recursive & iterative
+int BinomialCoefficient(int n, int m);
+int BinomialCoefficientR(int n, int m);
 
 // p29 EX.11 [Ackermann's function]
 // A(m, n) = n + 1, if m = 0

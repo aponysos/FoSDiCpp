@@ -2,6 +2,8 @@
 #include "gtest/gtest.h"
 #include "Algorithms01.h"
 
+#define ARRAY_LENGTH(__X__) (sizeof(__X__) / sizeof(*(__X__)))
+
 using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -48,9 +50,11 @@ TEST(ch01, testPerm)
 
 TEST(ch01, testFibonacci)
 {
-  int fibo[11] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 };
-  for (int i = 0; i < 11; ++i)
+  int fibo[] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 };
+  for (int i = 0; i < ARRAY_LENGTH(fibo); ++i) {
     EXPECT_EQ(Fibonacci(i), fibo[i]);
+    EXPECT_EQ(FibonacciR(i), fibo[i]);
+  }
 }
 
 TEST(ch01, testMagic)
@@ -79,20 +83,22 @@ TEST(ch01_ex, testSortTriple)
   EXPECT_LE(tr[1], tr[2]);
 }
 
-#define ARRAY_LENGTH(__X__) (sizeof(__X__) / sizeof(*(__X__)))
-
 TEST(ch01_ex, testFactorial)
 {
-  int fact[11] = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800 };
+  int fact[] = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800 };
   for (int i = 0; i < ARRAY_LENGTH(fact); ++i) {
     EXPECT_EQ(Factorial(i), fact[i]);
     EXPECT_EQ(FactorialR(i), fact[i]);
   }
 }
 
-TEST(ch01_ex, testFibonacciR)
+TEST(ch01_ex, testBinomialCoefficient)
 {
-  int fibo[11] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 };
-  for (int i = 0; i < ARRAY_LENGTH(fibo); ++i)
-    EXPECT_EQ(FibonacciR(i), fibo[i]);
+  int an[] = {5, 5, 5, 5};
+  int am[] = {0, 1, 5, 3};
+  int abc[] = {1, 5, 1, 10};
+  for (int i = 0; i < ARRAY_LENGTH(abc); ++i) {
+    EXPECT_EQ(BinomialCoefficient(an[i], am[i]), abc[i]);
+    EXPECT_EQ(BinomialCoefficientR(an[i], am[i]), abc[i]);
+  }
 }

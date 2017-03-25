@@ -195,3 +195,18 @@ int FibonacciR(int n)
   else
     return FibonacciR(n - 1) + FibonacciR(n - 2);
 }
+
+int BinomialCoefficient(int n, int m)
+{
+  return Factorial(n) / Factorial(n - m) / Factorial(m);
+}
+
+int BinomialCoefficientR(int n, int m)
+{
+  if (m == 0)
+    return 1;
+  else if (n == m)
+    return 1;
+  else
+    return BinomialCoefficientR(n - 1, m - 1) + BinomialCoefficientR(n - 1, m);
+}
