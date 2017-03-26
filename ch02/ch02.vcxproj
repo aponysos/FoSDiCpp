@@ -85,6 +85,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ch02_ex1_complex_quadratic.h" />
     <ClInclude Include="Polynomial.h" />
     <ClInclude Include="SparseMatrix.h" />
     <ClInclude Include="stdafx.h" />
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CH02Test.cpp" />
+    <ClCompile Include="ch02_ex1_complex_quadratic.cpp" />
     <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="SparseMatrix.cpp" />
     <ClCompile Include="stdafx.cpp">
