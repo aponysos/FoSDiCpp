@@ -70,6 +70,13 @@ TEST(ch01, testMagic)
   Magic(52);
 }
 
+TEST(ch01, testHornerEval)
+{
+  int a[] = { 3, 2, 1 };
+  EXPECT_EQ(HornerEval(a, ARRAY_LENGTH(a), 1), 6);
+  EXPECT_EQ(HornerEval(a, ARRAY_LENGTH(a), 2), 11);
+}
+
 TEST(ch01_ex, testPrintAllAssignments)
 {
   PrintAllAssignments(2);

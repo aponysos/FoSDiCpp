@@ -2,10 +2,13 @@
 
 // ch01 exercises p27 - p29
 
-// p28 EX.1 see ch02 Polynomial
+// p28 EX.1 [Horner's rule]
+// evaluate a polynomial at a point x0 using a minimum number of multiplications
+// also see ch02 Polynomial
+int HornerEval(int *a, int n, int x0);
 
 // p28 EX.2 [print all assignments]
-// Given n Boolean variables, print all possible combinations of truth values they can assume
+// given n Boolean variables, print all possible combinations of truth values they can assume
 void PrintAllAssignments(int n);
 void PrintAllAssignments(bool *arr, int m, int n);
 

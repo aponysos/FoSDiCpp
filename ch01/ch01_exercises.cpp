@@ -5,6 +5,15 @@
 
 using namespace std;
 
+int HornerEval(int * a, int n, int x0)
+{
+  int i = n - 1;
+  int result = a[i];
+  while (i-- > 0)
+    result = result * x0 + a[i];
+  return result;
+}
+
 void PrintAllAssignments(int n)
 {
   boost::scoped_array<bool> arr(new bool[n]);
