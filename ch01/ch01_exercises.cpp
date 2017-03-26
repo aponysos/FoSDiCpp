@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "ch01_exercises.h"
-#include "boost\smart_ptr\scoped_array.hpp"
 #include <vector>
+#include "boost\smart_ptr\scoped_array.hpp"
+#include "ch01_exercises.h"
 
 using namespace std;
 
