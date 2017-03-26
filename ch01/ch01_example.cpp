@@ -106,13 +106,10 @@ void Magic(int n)
   const int MAX_SIZE = 51; // maximum square size
 
   // check correctness of n
-  if (n < 1 || n > MAX_SIZE) {
-    cerr << "Error!..n out of range" << endl;
-    return;
-  } else if (!(n % 2)) {
-    cerr << "Error!..n is even" << endl;
-    return;
-  }
+  if (n < 1 || n > MAX_SIZE)
+    throw out_of_range("n out of range [1, 51]");
+  else if (!(n % 2))
+    throw domain_error("n is even");
 
   // n is odd. Coxeter's rule can be used
   int square[MAX_SIZE][MAX_SIZE];

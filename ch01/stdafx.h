@@ -13,6 +13,7 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <stdexcept>
 #include "boost/smart_ptr/scoped_array.hpp"
 #include "gtest/gtest.h"
 

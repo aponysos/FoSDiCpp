@@ -52,11 +52,26 @@ TEST(ch01_examples, testFibonacci)
 TEST(ch01_examples, testMagic)
 {
   cout << '\n';
-  Magic(0);
+  try {
+    Magic(0);
+  }
+  catch (exception & e) {
+    cerr << e.what() << '\n';
+  }
   Magic(1);
   Magic(3);
   Magic(5);
-  Magic(6);
+  try {
+    Magic(6);
+  }
+  catch (exception & e) {
+    cerr << e.what() << '\n';
+  }
   Magic(7);
-  Magic(52);
+  try {
+    Magic(52);
+  }
+  catch (exception & e) {
+    cerr << e.what() << '\n';
+  }
 }

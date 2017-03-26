@@ -95,7 +95,7 @@ int Ackermann(int m, int n)
     return ret - 3;
   }
   default:
-    throw exception();
+    throw out_of_range("m out of range [0, 4] not supported now");
   }
 }
 

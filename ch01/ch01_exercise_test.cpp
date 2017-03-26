@@ -53,6 +53,18 @@ TEST(ch01_ex, testAckermann)
     EXPECT_EQ(Ackermann(am[i], an[i]), aa[i]);
     EXPECT_EQ(AckermannR(am[i], an[i]), aa[i]);
   }
+  try {
+    Ackermann(-1, 0);
+  }
+  catch (exception & e) {
+    cerr << e.what() << '\n';
+  }
+  try {
+    Ackermann(5, 0);
+  }
+  catch (exception & e) {
+    cerr << e.what() << '\n';
+  }
 }
 
 TEST(ch01_ex, testPigeonHole)
