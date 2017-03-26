@@ -113,6 +113,14 @@ TEST(ch01_ex, testAckermann)
     EXPECT_EQ(AckermannR(am[i], an[i]), aa[i]);
   }
 }
+
+TEST(ch01_ex, testPigeonHole)
+{
+  auto f = [](int i) { return i % 3; };
+  EXPECT_EQ(PigeonHole(f, 3), false);
+  EXPECT_EQ(PigeonHole(f, 4), true);
+}
+
 TEST(ch01_ex, testIsSumOfDivisors)
 {
   EXPECT_EQ(IsSumOfDivisors(1), false);

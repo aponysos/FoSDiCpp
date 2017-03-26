@@ -246,6 +246,21 @@ int AckermannR(int m, int n)
     return AckermannR(m - 1, AckermannR(m, n - 1));
 }
 
+bool PigeonHole(int(*f)(int), int n)
+{
+  bool found = false;
+  boost::scoped_array<int> results(new int[n]);
+  for (int i = 0; i < n; ++i)
+    results[i] = f(i + 1);
+  for (int j = 0; j < n; ++j)
+    for (int k = j + 1; k < n; ++k)
+      if (results[j] == results[k]) {
+        cout << "f(" << j << ") == f(" << k << ") == " << results[j] << '\n';
+        found = true;
+      }
+  return found;
+}
+
 bool IsSumOfDivisors(int n)
 {
   vector<int> divisors;

@@ -70,6 +70,7 @@ int AckermannR(int m, int n);
 // p29 EX.12 [pigeonhole principle]
 // find the values a & b, for which the range values are equal, f(a) = f(b)
 // the inputs are 1, 2, 3, ... , n
+bool PigeonHole(int(*f)(int), int n);
 
 // p29 EX.13
 // Given a positive integer n, determine if n is the sum of all of its divisors
