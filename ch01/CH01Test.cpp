@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "gtest/gtest.h"
 #include "Algorithms01.h"
+#include "ch01_exercises.h"
 
 #define ARRAY_LENGTH(__X__) (sizeof(__X__) / sizeof(*(__X__)))
 
