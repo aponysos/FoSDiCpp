@@ -129,15 +129,15 @@ int SparseMatrix::StoreSum(int sum, int & lastInResult, int r, int c)
     return 0;
   }
   else
-    return 1;
+    throw length_error("can not NewTerm, exceeds MAX_TERMS");
 }
 
 SparseMatrix & SparseMatrix::operator*=(const SparseMatrix & b)
 {
   if (cols != b.rows)
-    throw exception();
+    throw domain_error("columes & rows not match");
   if ((terms == MAX_TERMS) || (b.terms == MAX_TERMS))
-    throw exception();
+    throw length_error("terms above MAX_TERMS");
 
   SparseMatrix result;
   SparseMatrix bXpose = b.FastTranspose();
@@ -162,8 +162,7 @@ SparseMatrix & SparseMatrix::operator*=(const SparseMatrix & b)
       if (smArray[curRowIndex].row != curRowA // end of row curRowA of A
         || bXpose.smArray[curColIndex].row != curColB) // end of column curColB of b
       {
-        if (result.StoreSum(sum, lastInResult, curRowA, curColB))
-          throw exception();
+        result.StoreSum(sum, lastInResult, curRowA, curColB);
 
         sum = 0; // reset sum
         curRowIndex = curRowBegin;

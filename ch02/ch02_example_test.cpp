@@ -3,6 +3,8 @@
 #include "sparse_matrix.h"
 #include "ch02_string.h"
 
+using namespace std;
+
 TEST(ch02, testPolynomial)
 {
   Polynomial a;
@@ -83,6 +85,13 @@ TEST(ch02, testSparseMatrix)
   sm5.NewTerm(2, 2, 1);
   sm3 *= sm4;
   EXPECT_TRUE(sm3 == sm5);
+
+  try {
+    sm2 *= sm3;
+  }
+  catch (exception & e) {
+    cerr << e.what() << '\n';
+  }
 }
 
 TEST(ch02, testString)
