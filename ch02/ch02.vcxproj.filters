@@ -45,6 +45,9 @@
     <ClInclude Include="complex_quadratic.h">
       <Filter>Exercises</Filter>
     </ClInclude>
+    <ClInclude Include="cpparray.h">
+      <Filter>Exercises</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -69,6 +72,12 @@
       <Filter>TestCase</Filter>
     </ClCompile>
     <ClCompile Include="complex_quadratic_test.cpp">
+      <Filter>TestCase</Filter>
+    </ClCompile>
+    <ClCompile Include="cpparray.cpp">
+      <Filter>Exercises</Filter>
+    </ClCompile>
+    <ClCompile Include="cpparray_test.cpp">
       <Filter>TestCase</Filter>
     </ClCompile>
   </ItemGroup>
