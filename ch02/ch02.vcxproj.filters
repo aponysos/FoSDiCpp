@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="TestCase">
+      <UniqueIdentifier>{76af3a7c-bdca-4bf3-aecc-972f6386d339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{1cbe739d-98ad-4612-a2c0-9a54ab6d1742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exercises">
+      <UniqueIdentifier>{fb299d6e-d823-40c4-a57f-b4aab7e75748}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,37 +33,43 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Polynomial.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="poly.h">
+      <Filter>Examples</Filter>
     </ClInclude>
-    <ClInclude Include="SparseMatrix.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="sparse_matrix.h">
+      <Filter>Examples</Filter>
     </ClInclude>
-    <ClInclude Include="String.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ch02_string.h">
+      <Filter>Examples</Filter>
     </ClInclude>
-    <ClInclude Include="ch02_ex1_complex_quadratic.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="complex_quadratic.h">
+      <Filter>Exercises</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CH02Test.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Polynomial.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="poly.cpp">
+      <Filter>Examples</Filter>
     </ClCompile>
-    <ClCompile Include="SparseMatrix.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="sparse_matrix.cpp">
+      <Filter>Examples</Filter>
     </ClCompile>
-    <ClCompile Include="String.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ch02_string.cpp">
+      <Filter>Examples</Filter>
     </ClCompile>
-    <ClCompile Include="ch02_ex1_complex_quadratic.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="complex_quadratic.cpp">
+      <Filter>Exercises</Filter>
+    </ClCompile>
+    <ClCompile Include="ch02_example_test.cpp">
+      <Filter>TestCase</Filter>
+    </ClCompile>
+    <ClCompile Include="complex_quadratic_test.cpp">
+      <Filter>TestCase</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

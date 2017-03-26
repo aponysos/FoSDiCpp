@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Polynomial.h"
+#include "poly.h"
 
 using namespace std;
 

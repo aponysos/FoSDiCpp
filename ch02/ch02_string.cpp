@@ -1,6 +1,5 @@
 #include "stdafx.h"
-#include "String.h"
-#include "boost\smart_ptr\scoped_array.hpp"
+#include "ch02_string.h"
 
 using namespace std;
 

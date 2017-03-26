@@ -1,6 +1,5 @@
 #include "stdafx.h"
-#include "SparseMatrix.h"
-#include "boost\smart_ptr\scoped_array.hpp"
+#include "sparse_matrix.h"
 
 using namespace std;
 

@@ -7,8 +7,9 @@
 
 #include "targetver.h"
 
-#include <stdio.h>
 #include <tchar.h>
 
 // TODO: reference additional headers your program requires here
 #include <iostream>
+#include "boost\smart_ptr\scoped_array.hpp"
+#include "gtest/gtest.h"
