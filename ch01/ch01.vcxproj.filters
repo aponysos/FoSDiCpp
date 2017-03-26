@@ -27,7 +27,7 @@
     <ClInclude Include="Algorithms01.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ch01_exercises.h">
+    <ClInclude Include="ch01_ex5_algorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClCompile Include="Algorithms01.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ch01_exercises.cpp">
+    <ClCompile Include="ch01_ex5_algorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
