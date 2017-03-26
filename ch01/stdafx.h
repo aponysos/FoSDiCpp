@@ -7,9 +7,13 @@
 
 #include "targetver.h"
 
-#include <stdio.h>
 #include <tchar.h>
 
 // TODO: reference additional headers your program requires here
 #include <iostream>
 #include <iomanip>
+#include <vector>
+#include "boost/smart_ptr/scoped_array.hpp"
+#include "gtest/gtest.h"
+
+#define ARRAY_LENGTH(__X__) (sizeof(__X__) / sizeof(*(__X__)))

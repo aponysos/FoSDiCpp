@@ -23,8 +23,8 @@ int FactorialR(int n); // recursive
 
 // p29 EX.8 [fibonacci number]
 // compute fibonacci number fi, recursive & iterative
-// iterative: see Example 1.12, Program 1.21
-int FibonacciR(int n); // recursive
+// see Example 1.12, Program 1.21
+//int FibonacciR(int n); // recursive
 
 // p29 EX.9 EX.10 [binomial coefficient]
 // compute binomial coefficient (n, m), recursive & iterative

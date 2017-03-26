@@ -27,6 +27,7 @@ void Perm(char *a, const int k, const int n);
 // Program 1.21: Fibonacci numbers, p42
 // Compute the Fibonacci number Fn.
 int Fibonacci(int n);
+int FibonacciR(int n); // recursive, exercise 1_5_8
 
 // Example 1.18 [Magic square]
 // Program 1.22: Magic square p49

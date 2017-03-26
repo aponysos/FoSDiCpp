@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Algorithms01.h"
+#include "ch01_example.h"
 
 using namespace std;
 
@@ -89,6 +89,14 @@ int Fibonacci(int n)
 
     return fn;
   }
+}
+
+int FibonacciR(int n)
+{
+  if (n <= 1)
+    return n;
+  else
+    return FibonacciR(n - 1) + FibonacciR(n - 2);
 }
 
 void Magic(int n)

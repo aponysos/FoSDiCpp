@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include <vector>
-#include "boost\smart_ptr\scoped_array.hpp"
-#include "ch01_exercises.h"
+#include "ch01_exercise.h"
 
 using namespace std;
 
@@ -60,14 +58,6 @@ int FactorialR(int n)
     return 1;
   else
     return FactorialR(n - 1) * n;
-}
-
-int FibonacciR(int n)
-{
-  if (n <= 1)
-    return n;
-  else
-    return FibonacciR(n - 1) + FibonacciR(n - 2);
 }
 
 int BinomialCoefficient(int n, int m)
