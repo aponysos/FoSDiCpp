@@ -3,8 +3,6 @@
 #include "sparse_matrix.h"
 #include "ch02_string.h"
 
-using namespace std;
-
 TEST(ch02, testPolynomial)
 {
   Polynomial a;

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "ch02_string.h"
 
-using namespace std;
-
 String::String(const char *init, int l)
   : str(""), len(0)
 {
