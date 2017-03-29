@@ -7,14 +7,22 @@ class Complex
 {
 public:
   Complex(double real = 0.0, double image = 0.0);
+  Complex(const Complex & c);
+  Complex & operator=(const Complex & c);
 
 public:
+  Complex & operator+=(const Complex & c);
+  Complex & operator*=(const Complex & c);
   Complex operator+(const Complex & c) const;
   Complex operator*(const Complex & c) const;
 
 public:
   friend std::istream & operator>>(std::istream & is, Complex & c);
   friend std::ostream & operator<<(std::ostream & os, const Complex & c);
+
+private:
+  double real_;
+  double image_;
 };
 
 class Quadratic
