@@ -15,6 +15,12 @@ public:
   Complex & operator*=(const Complex & c);
   Complex operator+(const Complex & c) const;
   Complex operator*(const Complex & c) const;
+  Complex operator-() const;
+  Complex & operator-=(const Complex & c);
+  Complex operator-(const Complex & c) const;
+
+public:
+  bool operator==(const Complex & c) const;
 
 public:
   friend std::istream & operator>>(std::istream & is, Complex & c);

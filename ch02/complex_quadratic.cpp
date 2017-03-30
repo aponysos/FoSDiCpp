@@ -29,8 +29,10 @@ Complex & Complex::operator+=(const Complex & c)
 
 Complex & Complex::operator*=(const Complex & c)
 {
-  real_ = real_ * c.real_ - image_ * c.image_;
-  image_ = real_ * c.image_ + image_ * c.real_;
+  double r = real_ * c.real_ - image_ * c.image_;
+  double i = real_ * c.image_ + image_ * c.real_;
+  real_ = r;
+  image_ = i;
   return *this;
 }
 
@@ -46,6 +48,30 @@ Complex Complex::operator*(const Complex & c) const
   Complex result(*this);
   result *= c;
   return result;
+}
+
+Complex Complex::operator-() const
+{
+  return Complex(-real_, -image_);
+}
+
+Complex & Complex::operator-=(const Complex & c)
+{
+  real_ -= c.real_;
+  image_ -= c.image_;
+  return *this;
+}
+
+Complex Complex::operator-(const Complex & c) const
+{
+  Complex result(*this);
+  result -= c;
+  return result;
+}
+
+bool Complex::operator==(const Complex & c) const
+{
+  return real_ == c.real_ && image_ == c.image_;
 }
 
 std::istream & operator>>(std::istream & is, Complex & c)
