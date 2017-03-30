@@ -74,13 +74,15 @@ bool Complex::operator==(const Complex & c) const
   return real_ == c.real_ && image_ == c.image_;
 }
 
+bool Complex::operator!=(const Complex & c) const
+{
+  return real_ != c.real_ || image_ != c.image_;
+}
+
 std::istream & operator>>(std::istream & is, Complex & c)
 {
   char cc;
   is >> c.real_;
-  //is >> cc;
-  //if (cc != '+')
-  //  throw invalid_argument("missing +");
   is >> c.image_;
   is >> cc;
   if (cc != 'i')
@@ -90,6 +92,70 @@ std::istream & operator>>(std::istream & is, Complex & c)
 
 std::ostream & operator<<(std::ostream & os, const Complex & c)
 {
-  os << c.real_ << (c.image_ >= 0 ? "+" : "") << c.image_ << 'i';
+  os << c.real_ << showpos << c.image_ << 'i';
+  return os;
+}
+
+Quadratic::Quadratic(double a, double b, double c)
+  : a_(a), b_(b), c_(c)
+{
+}
+
+Quadratic::Quadratic(const Quadratic & q)
+  : Quadratic(q.a_, q.b_, q.c_)
+{
+}
+
+Quadratic & Quadratic::operator=(const Quadratic & q)
+{
+  a_ = q.a_;
+  b_ = q.b_;
+  c_ = q.c_;
+  return *this;
+}
+
+Quadratic & Quadratic::operator+=(const Quadratic & q)
+{
+  a_ += q.a_;
+  b_ += q.b_;
+  c_ += q.c_;
+  return *this;
+}
+
+Quadratic Quadratic::operator+(const Quadratic & q) const
+{
+  Quadratic result(*this);
+  result += q;
+  return result;
+}
+
+double Quadratic::Evaluate(double x) const
+{
+  return a_ * x * x + b_ * x + c_;
+}
+
+std::pair<Complex, Complex> Quadratic::GetSolutions() const
+{
+  return std::pair<Complex, Complex>();
+}
+
+std::istream & operator>>(std::istream & is, Quadratic & q)
+{
+  is >> q.a_;
+  return is;
+}
+
+std::string Double2String(double d)
+{
+  stringstream ss;
+  ss << showpos << d;
+  string str;
+  ss >> str;
+  return str;
+}
+
+std::ostream & operator<<(std::ostream & os, const Quadratic & q)
+{
+  os << Double2String(q.a_) << "x^2" << Double2String(q.b_) << "x" << q.c_;
   return os;
 }

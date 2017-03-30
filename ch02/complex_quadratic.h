@@ -21,6 +21,7 @@ public:
 
 public:
   bool operator==(const Complex & c) const;
+  bool operator!=(const Complex & c) const;
 
 public:
   friend std::istream & operator>>(std::istream & is, Complex & c);
@@ -35,8 +36,11 @@ class Quadratic
 {
 public:
   Quadratic(double a = 0.0, double b = 0.0, double c = 0.0);
+  Quadratic(const Quadratic & q);
+  Quadratic & operator=(const Quadratic & q);
 
 public:
+  Quadratic & operator+=(const Quadratic & q);
   Quadratic operator+(const Quadratic & q) const;
 
 public:

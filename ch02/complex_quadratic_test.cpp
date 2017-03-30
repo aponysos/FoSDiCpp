@@ -3,7 +3,7 @@
 
 using namespace std;
 
-TEST(ch02, testComplexQuadratic)
+TEST(ch02, testComplex)
 {
   Complex c1(1, 3);
   cout << c1 << '\n';
@@ -20,4 +20,15 @@ TEST(ch02, testComplexQuadratic)
   Complex c5 = c1 - c2;
   cout << c5 << '\n';
   EXPECT_EQ(c5, Complex(-2, 8));
+  EXPECT_EQ(c5 != c5, false);
+}
+
+TEST(ch02, testQuadratic)
+{
+  Quadratic q1(1, 2, -3);
+  cout << q1 << '\n';
+  EXPECT_EQ(q1.Evaluate(1), 0);
+  auto solutions = q1.GetSolutions();
+  EXPECT_EQ(solutions.first, -3);
+  EXPECT_EQ(solutions.first, 1);
 }
