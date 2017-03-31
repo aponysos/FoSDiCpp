@@ -136,7 +136,10 @@ double Quadratic::Evaluate(double x) const
 
 std::pair<Complex, Complex> Quadratic::GetSolutions() const
 {
-  return std::pair<Complex, Complex>();
+  double delta = b_ * b_ - 4 * a_ * c_;
+  double s1 = (-b_ + sqrt(delta)) / 2 / a_;
+  double s2 = (-b_ - sqrt(delta)) / 2 / a_;
+  return make_pair<Complex, Complex>(s1, s2);
 }
 
 std::istream & operator>>(std::istream & is, Quadratic & q)
@@ -145,17 +148,26 @@ std::istream & operator>>(std::istream & is, Quadratic & q)
   return is;
 }
 
-std::string Double2String(double d)
-{
-  stringstream ss;
-  ss << showpos << d;
-  string str;
-  ss >> str;
-  return str;
-}
-
 std::ostream & operator<<(std::ostream & os, const Quadratic & q)
 {
-  os << Double2String(q.a_) << "x^2" << Double2String(q.b_) << "x" << q.c_;
+  double a = q.a_, b = q.b_, c = q.c_;
+  bool hasNonzero = false;
+
+  if (a != 0) {
+    hasNonzero = true;
+    if (a != 1)
+      os << a;
+    os << "x^2";
+  }
+
+  if (b != 0) {
+    if (b != 1) {
+      os << (hasNonzero ? showpos : noshowpos) << b;
+    }
+    os << "x";
+  }
+
+  if (c != 0 || !hasNonzero)
+    os << (hasNonzero || c == 0 ? noshowpos : showpos) << c;
   return os;
 }

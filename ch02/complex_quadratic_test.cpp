@@ -25,10 +25,17 @@ TEST(ch02, testComplex)
 
 TEST(ch02, testQuadratic)
 {
+  cout << Quadratic(0, 0, 0) << '\n';
+  cout << Quadratic(1, -1, 0) << '\n';
+  cout << Quadratic(2, 1, -2) << '\n';
+  cout << Quadratic(0, 2, 1) << '\n';
+  cout << Quadratic(-2, -2, 0) << '\n';
+  cout << Quadratic(-1, 2, -1) << '\n';
+  cout << Quadratic(-1, 1, 1) << '\n';
   Quadratic q1(1, 2, -3);
   cout << q1 << '\n';
   EXPECT_EQ(q1.Evaluate(1), 0);
   auto solutions = q1.GetSolutions();
-  EXPECT_EQ(solutions.first, -3);
   EXPECT_EQ(solutions.first, 1);
+  EXPECT_EQ(solutions.second, -3);
 }
