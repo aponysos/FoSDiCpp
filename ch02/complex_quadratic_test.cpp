@@ -37,8 +37,9 @@ TEST(ch02, testQuadratic)
   EXPECT_EQ(Quadratic2String(Quadratic(1, -1, 0)), "x^2-x");
   EXPECT_EQ(Quadratic2String(Quadratic(2, 1, -2)), "2x^2+x-2");
   EXPECT_EQ(Quadratic2String(Quadratic(0, 2, 1)), "2x+1");
+  EXPECT_EQ(Quadratic2String(Quadratic(0, -2, 0)), "-2x");
   EXPECT_EQ(Quadratic2String(Quadratic(-2, -2, 0)), "-2x^2-2x");
-  EXPECT_EQ(Quadratic2String(Quadratic(-1, 2, -1)), "-x^2+2x-1");
+  EXPECT_EQ(Quadratic2String(Quadratic(-1, 0, -1)), "-x^2-1");
   EXPECT_EQ(Quadratic2String(Quadratic(-1, 1, 1)), "-x^2+x+1");
   EXPECT_EQ(Quadratic2String(Quadratic(1, 0, 2)), "x^2+2");
   Quadratic q1(1, 2, -3);

@@ -151,23 +151,30 @@ std::istream & operator>>(std::istream & is, Quadratic & q)
 std::ostream & operator<<(std::ostream & os, const Quadratic & q)
 {
   double a = q.a_, b = q.b_, c = q.c_;
-  bool hasNonzero = false;
-
+  bool hasNonzeroTerm = false;
+  // term x^2
   if (a != 0) {
-    hasNonzero = true;
-    if (a != 1)
+    if (abs(a) == 1) {
+      if (a < 0)
+        os << '-';
+    } else
       os << a;
     os << "x^2";
+    hasNonzeroTerm = true;
   }
-
+  // term x
   if (b != 0) {
-    if (b != 1) {
-      os << (hasNonzero ? showpos : noshowpos) << b;
-    }
+    if (abs(b) == 1)
+      os << (b < 0 ? '-' : '+');
+    else
+      os << (hasNonzeroTerm ? showpos : noshowpos) << b;
     os << "x";
+    hasNonzeroTerm = true;
   }
-
-  if (c != 0 || !hasNonzero)
-    os << (hasNonzero || c == 0 ? noshowpos : showpos) << c;
+  // constant term
+  if (c != 0)
+    os << (hasNonzeroTerm ? showpos : noshowpos) << c;
+  else if (!hasNonzeroTerm)
+    os << '0';
   return os;
 }
