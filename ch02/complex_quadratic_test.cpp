@@ -3,6 +3,29 @@
 
 using namespace std;
 
+string Complex2String(const Complex & c)
+{
+  ostringstream oss;
+  oss << c;
+  cout << c << '\n';
+  return oss.str();
+}
+
+TEST(ch02, testComplexOutput)
+{
+  EXPECT_EQ(Complex2String(Complex(0, 0)), "0");
+  EXPECT_EQ(Complex2String(Complex(1, 0)), "1");
+  EXPECT_EQ(Complex2String(Complex(-2, 0)), "-2");
+  EXPECT_EQ(Complex2String(Complex(0, 1)), "i");
+  EXPECT_EQ(Complex2String(Complex(0, -1)), "-i");
+  EXPECT_EQ(Complex2String(Complex(0, 3)), "3i");
+  EXPECT_EQ(Complex2String(Complex(0, -2)), "-2i");
+  EXPECT_EQ(Complex2String(Complex(1, 1)), "1+i");
+  EXPECT_EQ(Complex2String(Complex(2, -2)), "2-2i");
+  EXPECT_EQ(Complex2String(Complex(3, -1)), "3-i");
+  EXPECT_EQ(Complex2String(Complex(-1, -3)), "-1-3i");
+}
+
 TEST(ch02, testComplex)
 {
   Complex c1(1, 3);
@@ -31,19 +54,23 @@ string Quadratic2String(const Quadratic & q)
   return oss.str();
 }
 
-TEST(ch02, testQuadratic)
+TEST(ch02, testQuadraticOutput)
 {
   EXPECT_EQ(Quadratic2String(Quadratic(0, 0, 0)), "0");
   EXPECT_EQ(Quadratic2String(Quadratic(1, -1, 0)), "x^2-x");
   EXPECT_EQ(Quadratic2String(Quadratic(2, 1, -2)), "2x^2+x-2");
   EXPECT_EQ(Quadratic2String(Quadratic(0, 2, 1)), "2x+1");
   EXPECT_EQ(Quadratic2String(Quadratic(0, -2, 0)), "-2x");
+  EXPECT_EQ(Quadratic2String(Quadratic(0, 1, 0)), "x");
   EXPECT_EQ(Quadratic2String(Quadratic(-2, -2, 0)), "-2x^2-2x");
   EXPECT_EQ(Quadratic2String(Quadratic(-1, 0, -1)), "-x^2-1");
   EXPECT_EQ(Quadratic2String(Quadratic(-1, 1, 1)), "-x^2+x+1");
   EXPECT_EQ(Quadratic2String(Quadratic(1, 0, 2)), "x^2+2");
+}
+
+TEST(ch02, testQuadratic)
+{
   Quadratic q1(1, 2, -3);
-  cout << q1 << '\n';
   EXPECT_EQ(q1.Evaluate(1), 0);
   auto solutions = q1.GetSolutions();
   EXPECT_EQ(solutions.first, 1);

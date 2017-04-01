@@ -92,7 +92,23 @@ std::istream & operator>>(std::istream & is, Complex & c)
 
 std::ostream & operator<<(std::ostream & os, const Complex & c)
 {
-  os << c.real_ << showpos << c.image_ << 'i';
+  double r = c.real_, i = c.image_;
+  // real part
+  if (r != 0 || i == 0)
+    os << noshowpos << r;
+  // image part
+  if (i != 0) {
+    if (abs(i) == 1) {
+      if (i < 0)
+        os << '-';
+      else if (r != 0)
+        os << '+';
+    }
+    else
+      os << (r != 0 ? showpos : noshowpos) << i;
+    os << 'i';
+  }
+  os << noshowpos;
   return os;
 }
 
@@ -158,14 +174,18 @@ std::ostream & operator<<(std::ostream & os, const Quadratic & q)
       if (a < 0)
         os << '-';
     } else
-      os << a;
+      os << noshowpos << a;
     os << "x^2";
     hasNonzeroTerm = true;
   }
   // term x
   if (b != 0) {
-    if (abs(b) == 1)
-      os << (b < 0 ? '-' : '+');
+    if (abs(b) == 1) {
+      if (b < 0)
+        os << '-';
+      else if (a != 0)
+        os << '+';
+    }
     else
       os << (hasNonzeroTerm ? showpos : noshowpos) << b;
     os << "x";
@@ -176,5 +196,6 @@ std::ostream & operator<<(std::ostream & os, const Quadratic & q)
     os << (hasNonzeroTerm ? showpos : noshowpos) << c;
   else if (!hasNonzeroTerm)
     os << '0';
+  os << noshowpos;
   return os;
 }
