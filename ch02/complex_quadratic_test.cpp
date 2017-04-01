@@ -23,15 +23,24 @@ TEST(ch02, testComplex)
   EXPECT_EQ(c5 != c5, false);
 }
 
+string Quadratic2String(const Quadratic & q)
+{
+  ostringstream oss;
+  oss << q;
+  cout << q << '\n';
+  return oss.str();
+}
+
 TEST(ch02, testQuadratic)
 {
-  cout << Quadratic(0, 0, 0) << '\n';
-  cout << Quadratic(1, -1, 0) << '\n';
-  cout << Quadratic(2, 1, -2) << '\n';
-  cout << Quadratic(0, 2, 1) << '\n';
-  cout << Quadratic(-2, -2, 0) << '\n';
-  cout << Quadratic(-1, 2, -1) << '\n';
-  cout << Quadratic(-1, 1, 1) << '\n';
+  EXPECT_EQ(Quadratic2String(Quadratic(0, 0, 0)), "0");
+  EXPECT_EQ(Quadratic2String(Quadratic(1, -1, 0)), "x^2-x");
+  EXPECT_EQ(Quadratic2String(Quadratic(2, 1, -2)), "2x^2+x-2");
+  EXPECT_EQ(Quadratic2String(Quadratic(0, 2, 1)), "2x+1");
+  EXPECT_EQ(Quadratic2String(Quadratic(-2, -2, 0)), "-2x^2-2x");
+  EXPECT_EQ(Quadratic2String(Quadratic(-1, 2, -1)), "-x^2+2x-1");
+  EXPECT_EQ(Quadratic2String(Quadratic(-1, 1, 1)), "-x^2+x+1");
+  EXPECT_EQ(Quadratic2String(Quadratic(1, 0, 2)), "x^2+2");
   Quadratic q1(1, 2, -3);
   cout << q1 << '\n';
   EXPECT_EQ(q1.Evaluate(1), 0);
