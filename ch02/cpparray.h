@@ -19,4 +19,8 @@ public:
   int GetSize() const;
   friend std::istream & operator>>(std::istream & is, CppArray & ca);
   friend std::ostream & operator<<(std::ostream & os, const CppArray & ca);
+
+private:
+  double * pArr_;
+  int sz_;
 };
