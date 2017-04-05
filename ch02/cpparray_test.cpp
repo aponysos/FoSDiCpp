@@ -16,4 +16,5 @@ TEST(ch02, testCppArray)
   ca3[0] = 2;
   EXPECT_EQ(ca3[0], 2);
   cout << ca3 << '\n';
+  EXPECT_EQ(ca3.GetSize(), 16);
 }
