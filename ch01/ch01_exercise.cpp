@@ -147,7 +147,7 @@ void Powerset(const char * s, int n)
 void Powerset(const char * s, bool * b, int m, int n)
 {
   if (m == n) {
-    int isEmpty = true;
+    bool isEmpty = true;
     for (int i = 0; i < n; ++i)
       if (b[i]) {
         cout << s[i] << " ";
