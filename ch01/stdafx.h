@@ -17,4 +17,6 @@
 #include "boost/smart_ptr/scoped_array.hpp"
 #include "gtest/gtest.h"
 
+#ifndef ARRAY_LENGTH
 #define ARRAY_LENGTH(__X__) (sizeof(__X__) / sizeof(*(__X__)))
+#endif // !ARRAY_LENGTH
